@@ -122,18 +122,18 @@ const NavBar = () => {
     const scrolled = latest > (typeof window !== 'undefined' ? window.innerHeight * 0.4 : 300);
     if (scrolled !== isScrolled) setIsScrolled(scrolled);
   });
-  
+
   return (
     <nav className={`fixed w-full top-0 z-50 p-4 md:p-6 flex justify-between items-center transition-all duration-300 ${isScrolled ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm' : 'bg-transparent'}`}>
       <div className="flex items-center gap-4 relative min-w-[200px] h-10">
         <Link to="/" className="flex items-center gap-3 w-max z-10 group cursor-pointer">
           <div className="w-10 h-10 flex-shrink-0 overflow-hidden rounded-full border border-border group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)] transition-all duration-300 flex items-center justify-center bg-surface">
             {portfolioData.hero.profilePhoto && !imageError ? (
-              <img 
-                src={portfolioData.hero.profilePhoto} 
-                alt={portfolioData.hero.name} 
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300" 
-                onError={() => setImageError(true)} 
+              <img
+                src={portfolioData.hero.profilePhoto}
+                alt={portfolioData.hero.name}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                onError={() => setImageError(true)}
               />
             ) : (
               <span className="font-bold text-sm text-textMuted group-hover:text-primary transition-colors">UT</span>
@@ -393,427 +393,427 @@ const App = () => {
         <main>
           {showHomeContent && (
             <>
-          {/* HERO SECTION */}
-          <section id="hero" ref={heroRef} className="min-h-screen relative flex flex-col justify-center px-6 pt-24 pb-12 max-w-[1920px] mx-auto overflow-hidden">
-            {/* Subtle radial vignette */}
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+              {/* HERO SECTION */}
+              <section id="hero" ref={heroRef} className="min-h-screen relative flex flex-col justify-center px-6 pt-24 pb-12 max-w-[1920px] mx-auto overflow-hidden">
+                {/* Subtle radial vignette */}
+                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
-            <div
-              ref={heroVisualRef}
-              className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 relative z-10 items-center"
-            >
-
-              {/* Left Column: Text & CTAs */}
-              <div className="lg:col-span-7 flex flex-col min-w-0">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-mono text-primary mb-6"
+                <div
+                  ref={heroVisualRef}
+                  className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 relative z-10 items-center"
                 >
-                  Open to software engineering roles
-                </motion.div>
 
-                <div className="overflow-hidden mb-2">
-                  <motion.h1
-                    initial={{ y: "100%" }}
-                    animate={isLoaded ? { y: 0 } : { y: "100%" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                    className="font-bold leading-[0.95] tracking-tighter uppercase break-normal min-w-0"
-                    style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
-                  >
-                    {portfolioData.hero.name.split(' ')[0]}
-                  </motion.h1>
+                  {/* Left Column: Text & CTAs */}
+                  <div className="lg:col-span-7 flex flex-col min-w-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="font-mono text-primary mb-6"
+                    >
+                      Open to software engineering roles
+                    </motion.div>
+
+                    <div className="overflow-hidden mb-2">
+                      <motion.h1
+                        initial={{ y: "100%" }}
+                        animate={isLoaded ? { y: 0 } : { y: "100%" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                        className="font-bold leading-[0.95] tracking-tighter uppercase break-normal min-w-0"
+                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
+                      >
+                        {portfolioData.hero.name.split(' ')[0]}
+                      </motion.h1>
+                    </div>
+                    <div className="overflow-hidden mb-8 flex gap-4">
+                      <motion.h1
+                        initial={{ y: "100%" }}
+                        animate={isLoaded ? { y: 0 } : { y: "100%" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                        className="font-bold leading-[0.95] tracking-tighter uppercase text-textMuted break-normal min-w-0"
+                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
+                      >
+                        {portfolioData.hero.name.split(' ').slice(1).join(' ')}
+                      </motion.h1>
+                    </div>
+
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
+                      className="text-xl md:text-2xl max-w-2xl text-textMuted mb-12 leading-relaxed"
+                    >
+                      I build full-stack web applications using React, Node.js and TypeScript, with a focus on scalable architecture and clean interfaces.
+                    </motion.p>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.8, delay: 0.8 }}
+                      className="flex flex-col sm:flex-row gap-6 w-full"
+                    >
+                      <Link to="/projects" className="px-8 py-4 bg-textMain text-background font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2">
+                        View Projects <ArrowRight size={18} />
+                      </Link>
+                      {portfolioData.resume.exists ? (
+                        <Link to="/resume" className="px-8 py-4 border border-border hover:border-primary text-textMain transition-colors flex items-center justify-center gap-2">
+                          View CV
+                        </Link>
+                      ) : (
+                        <span className="px-8 py-4 border border-border text-textMuted flex items-center justify-center gap-2 opacity-50 cursor-not-allowed">
+                          CV coming soon
+                        </span>
+                      )}
+                    </motion.div>
+
+                    <SocialLinks className="mt-6 md:mt-8" />
+                  </div>
+
+                  {/* Right Column: Visual Cluster */}
+                  <div className="lg:col-span-5 flex justify-center lg:justify-end mt-12 lg:mt-0">
+                    <div className="w-full max-w-[320px] md:max-w-[420px] lg:max-w-full relative">
+                      <HeroVisual isLoaded={isLoaded} />
+                    </div>
+                  </div>
                 </div>
-                <div className="overflow-hidden mb-8 flex gap-4">
-                  <motion.h1
-                    initial={{ y: "100%" }}
-                    animate={isLoaded ? { y: 0 } : { y: "100%" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-                    className="font-bold leading-[0.95] tracking-tighter uppercase text-textMuted break-normal min-w-0"
-                    style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
-                  >
-                    {portfolioData.hero.name.split(' ').slice(1).join(' ')}
-                  </motion.h1>
+              </section>
+
+              <Marquee items={allTech} />
+
+              {/* ABOUT SECTION */}
+              <section id="about" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
+                <div className="grid grid-cols-12 gap-6">
+                  <SectionHeader num="01 /" title="About Me" />
+
+                  <Reveal delay={0} className="col-span-12 lg:col-span-8 pr-0 lg:pr-12">
+                    <h3 className="text-2xl md:text-3xl leading-relaxed text-textMuted mb-8">
+                      {portfolioData.about.content}
+                    </h3>
+                  </Reveal>
+
+                  <Reveal delay={200} className="col-span-12 lg:col-span-4 flex flex-col gap-8 font-mono text-sm border-l-0 lg:border-l border-border pl-0 lg:pl-12 mt-8 lg:mt-0">
+                    <div>
+                      <span className="text-textMuted block mb-2">Location</span>
+                      <span className="text-textMain">{portfolioData.experience[0]?.location || "Maharashtra, India"}</span>
+                    </div>
+                    <div>
+                      <span className="text-textMuted block mb-2">Education</span>
+                      <span className="text-textMain">{portfolioData.education[0]?.degree}</span>
+                    </div>
+                    <Reveal delay={400}>
+                      <span className="text-textMuted block mb-2">Focus</span>
+                      <span className="text-textMain">Full-Stack Development</span>
+                    </Reveal>
+                  </Reveal>
                 </div>
+              </section>
 
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  className="text-xl md:text-2xl max-w-2xl text-textMuted mb-12 leading-relaxed"
-                >
-                  I build full-stack web applications using React, Node.js and TypeScript, with a focus on scalable architecture and clean interfaces.
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="flex flex-col sm:flex-row gap-6 w-full"
-                >
-                  <Link to="/projects" className="px-8 py-4 bg-textMain text-background font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2">
-                    View Projects <ArrowRight size={18} />
-                  </Link>
-                  {portfolioData.resume.exists ? (
-                    <Link to="/resume" className="px-8 py-4 border border-border hover:border-primary text-textMain transition-colors flex items-center justify-center gap-2">
-                      View CV
-                    </Link>
-                  ) : (
-                    <span className="px-8 py-4 border border-border text-textMuted flex items-center justify-center gap-2 opacity-50 cursor-not-allowed">
-                      CV coming soon
-                    </span>
-                  )}
-                </motion.div>
-
-                <SocialLinks className="mt-6 md:mt-8" />
-              </div>
-
-              {/* Right Column: Visual Cluster */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end mt-12 lg:mt-0">
-                <div className="w-full max-w-[320px] md:max-w-[420px] lg:max-w-full relative">
-                  <HeroVisual isLoaded={isLoaded} />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <Marquee items={allTech} />
-
-          {/* ABOUT SECTION */}
-          <section id="about" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="01 /" title="About Me" />
-
-              <Reveal delay={0} className="col-span-12 lg:col-span-8 pr-0 lg:pr-12">
-                <h3 className="text-2xl md:text-3xl leading-relaxed text-textMuted mb-8">
-                  {portfolioData.about.content}
-                </h3>
-              </Reveal>
-
-              <Reveal delay={200} className="col-span-12 lg:col-span-4 flex flex-col gap-8 font-mono text-sm border-l-0 lg:border-l border-border pl-0 lg:pl-12 mt-8 lg:mt-0">
-                <div>
-                  <span className="text-textMuted block mb-2">Location</span>
-                  <span className="text-textMain">{portfolioData.experience[0]?.location || "Maharashtra, India"}</span>
-                </div>
-                <div>
-                  <span className="text-textMuted block mb-2">Education</span>
-                  <span className="text-textMain">{portfolioData.education[0]?.degree}</span>
-                </div>
-                <Reveal delay={400}>
-                  <span className="text-textMuted block mb-2">Focus</span>
-                  <span className="text-textMain">Full-Stack Development</span>
-                </Reveal>
-              </Reveal>
-            </div>
-          </section>
-
-          </>
+            </>
           )}
 
           {/* PROJECTS SECTION */}
           {showProjects && (
-          <section id="projects" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="02 /" title="Projects" />
-              <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-8">
-                {portfolioData.projects.map((project, idx) => (
-                  <Reveal
-                    key={project.id}
-                    delay={Math.min(idx * 80, 480)}
-                    className="group border border-border bg-surface overflow-hidden flex flex-col h-full hover:border-primary/50 transition-colors"
-                  >
-                    <div className="w-full h-64 overflow-hidden relative cursor-pointer" onClick={() => setSelectedProject(project)}>
-                      <img src={project.coverImage} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-                    </div>
-                    <div className="p-8 flex flex-col flex-grow">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-2xl font-bold cursor-pointer hover:text-primary transition-colors" onClick={() => setSelectedProject(project)}>{project.title}</h3>
-                        <span className="font-mono text-xs text-primary px-3 py-1 border border-primary/30 rounded-full shrink-0">{project.status}</span>
+            <section id="projects" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
+              <div className="grid grid-cols-12 gap-6">
+                <SectionHeader num="02 /" title="Projects" />
+                <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-8">
+                  {portfolioData.projects.map((project, idx) => (
+                    <Reveal
+                      key={project.id}
+                      delay={Math.min(idx * 80, 480)}
+                      className="group border border-border bg-surface overflow-hidden flex flex-col h-full hover:border-primary/50 transition-colors"
+                    >
+                      <div className="w-full h-64 overflow-hidden relative cursor-pointer" onClick={() => setSelectedProject(project)}>
+                        <img src={project.coverImage} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
                       </div>
-                      <p className="text-textMuted leading-relaxed mb-6 flex-grow">{project.shortDescription}</p>
-                      <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                        {project.tech.slice(0, 4).map(t => (
-                          <span key={t} className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">{t}</span>
-                        ))}
-                        {project.tech.length > 4 && <span className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">+{project.tech.length - 4}</span>}
+                      <div className="p-8 flex flex-col flex-grow">
+                        <div className="flex justify-between items-start mb-4">
+                          <h3 className="text-2xl font-bold cursor-pointer hover:text-primary transition-colors" onClick={() => setSelectedProject(project)}>{project.title}</h3>
+                          <span className="font-mono text-xs text-primary px-3 py-1 border border-primary/30 rounded-full shrink-0">{project.status}</span>
+                        </div>
+                        <p className="text-textMuted leading-relaxed mb-6 flex-grow">{project.shortDescription}</p>
+                        <div className="flex flex-wrap gap-2 mb-8 mt-auto">
+                          {project.tech.slice(0, 4).map(t => (
+                            <span key={t} className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">{t}</span>
+                          ))}
+                          {project.tech.length > 4 && <span className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">+{project.tech.length - 4}</span>}
+                        </div>
+                        <div className="flex gap-4">
+                          <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1">
+                            VIEW DETAILS
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex gap-4">
-                        <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1">
-                          VIEW DETAILS
-                        </button>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
+                    </Reveal>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
           )}
 
           {showHomeContent && (
             <>
-          {/* SKILLS SECTION */}
-          <section id="skills" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="03 /" title="SKILLS" />
+              {/* SKILLS SECTION */}
+              <section id="skills" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
+                <div className="grid grid-cols-12 gap-6">
+                  <SectionHeader num="03 /" title="SKILLS" />
 
-              <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {portfolioData.skills.core.map((group, idx) => (
-                  <Reveal
-                    key={idx}
-                    delay={Math.min(idx * 80, 480)}
-                    className="p-8 border border-border bg-surface hover:border-border/80 transition-colors"
-                  >
-                    <h3 className="font-mono text-sm text-primary mb-6 uppercase tracking-widest">{group.category}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {group.items.map(item => (
-                        <span key={item} className="px-3 py-1 bg-background border border-border font-mono text-xs text-textMuted hover:text-textMain hover:border-primary/50 transition-colors cursor-default">
-                          {item}
-                        </span>
+                  <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {portfolioData.skills.core.map((group, idx) => (
+                      <Reveal
+                        key={idx}
+                        delay={Math.min(idx * 80, 480)}
+                        className="p-8 border border-border bg-surface hover:border-border/80 transition-colors"
+                      >
+                        <h3 className="font-mono text-sm text-primary mb-6 uppercase tracking-widest">{group.category}</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {group.items.map(item => (
+                            <span key={item} className="px-3 py-1 bg-background border border-border font-mono text-xs text-textMuted hover:text-textMain hover:border-primary/50 transition-colors cursor-default">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* EXPERIENCE & EDUCATION SECTION */}
+              <section id="experience" ref={experienceRef} className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
+                <div className="grid grid-cols-12 gap-6">
+                  <SectionHeader num="04 /" title="Experience" />
+
+                  <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
+                    {/* Timeline line drawing on scroll */}
+                    <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
+                    <motion.div
+                      className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary -translate-x-1/2 origin-top"
+                      style={{ scaleY: expScrollY }}
+                    />
+
+                    <div className="space-y-24">
+                      {/* Experience Map */}
+                      {portfolioData.experience.map((exp, idx) => (
+                        <Reveal
+                          key={idx}
+                          delay={Math.min(idx * 80, 480)}
+                          className="relative flex flex-col md:flex-row items-start justify-between w-full"
+                        >
+                          {/* Timeline Node */}
+                          <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-background border-2 border-primary rounded-full -translate-x-1/2 mt-2 z-10" />
+
+                          <div className="w-full md:w-[45%] pl-8 md:pl-0 md:pr-12 text-left md:text-right mb-4 md:mb-0">
+                            <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
+                            <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
+                              <span>{exp.company}</span>
+                              <span className="hidden md:inline">•</span>
+                              <span>{exp.duration}</span>
+                            </div>
+                          </div>
+
+                          <div className="w-full md:w-[45%] pl-8 md:pl-12">
+                            <ul className="space-y-3">
+                              {exp.highlights.map((h, i) => (
+                                <li key={i} className="text-textMuted leading-relaxed">
+                                  {h}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </Reveal>
+                      ))}
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* EDUCATION SECTION */}
+              <section id="education" ref={educationRef} className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
+                <div className="grid grid-cols-12 gap-6">
+                  <SectionHeader num="05 /" title="Education" />
+
+                  <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
+                    <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
+                    <motion.div
+                      className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary -translate-x-1/2 origin-top"
+                      style={{ scaleY: eduScrollY }}
+                    />
+
+                    <div className="space-y-24">
+                      {portfolioData.education.map((edu, idx) => (
+                        <Reveal
+                          key={`edu-${idx}`}
+                          delay={Math.min(idx * 80, 480)}
+                          className="relative flex flex-col md:flex-row items-start justify-between w-full"
+                        >
+                          <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-background border-2 border-primary rounded-full -translate-x-1/2 mt-2 z-10" />
+
+                          <div className="w-full md:w-[45%] pl-8 md:pl-0 md:pr-12 text-left md:text-right mb-4 md:mb-0">
+                            <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
+                            <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
+                              <span>{edu.institution}</span>
+                              <span className="hidden md:inline">•</span>
+                              <span>{edu.duration}</span>
+                            </div>
+                          </div>
+                        </Reveal>
                       ))}
                     </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* EXPERIENCE & EDUCATION SECTION */}
-          <section id="experience" ref={experienceRef} className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="04 /" title="Experience" />
-
-              <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
-                {/* Timeline line drawing on scroll */}
-                <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
-                <motion.div
-                  className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary -translate-x-1/2 origin-top"
-                  style={{ scaleY: expScrollY }}
-                />
-
-                <div className="space-y-24">
-                  {/* Experience Map */}
-                  {portfolioData.experience.map((exp, idx) => (
-                    <Reveal
-                      key={idx}
-                      delay={Math.min(idx * 80, 480)}
-                      className="relative flex flex-col md:flex-row items-start justify-between w-full"
-                    >
-                      {/* Timeline Node */}
-                      <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-background border-2 border-primary rounded-full -translate-x-1/2 mt-2 z-10" />
-
-                      <div className="w-full md:w-[45%] pl-8 md:pl-0 md:pr-12 text-left md:text-right mb-4 md:mb-0">
-                        <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
-                        <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
-                          <span>{exp.company}</span>
-                          <span className="hidden md:inline">•</span>
-                          <span>{exp.duration}</span>
-                        </div>
-                      </div>
-
-                      <div className="w-full md:w-[45%] pl-8 md:pl-12">
-                        <ul className="space-y-3">
-                          {exp.highlights.map((h, i) => (
-                            <li key={i} className="text-textMuted leading-relaxed">
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </Reveal>
-                  ))}
-
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* EDUCATION SECTION */}
-          <section id="education" ref={educationRef} className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="05 /" title="Education" />
-
-              <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
-                <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2" />
-                <motion.div
-                  className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary -translate-x-1/2 origin-top"
-                  style={{ scaleY: eduScrollY }}
-                />
-
-                <div className="space-y-24">
-                  {portfolioData.education.map((edu, idx) => (
-                    <Reveal
-                      key={`edu-${idx}`}
-                      delay={Math.min(idx * 80, 480)}
-                      className="relative flex flex-col md:flex-row items-start justify-between w-full"
-                    >
-                      <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-background border-2 border-primary rounded-full -translate-x-1/2 mt-2 z-10" />
-
-                      <div className="w-full md:w-[45%] pl-8 md:pl-0 md:pr-12 text-left md:text-right mb-4 md:mb-0">
-                        <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
-                        <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
-                          <span>{edu.institution}</span>
-                          <span className="hidden md:inline">•</span>
-                          <span>{edu.duration}</span>
-                        </div>
-                      </div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CERTIFICATIONS SECTION */}
-          <section id="certifications" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <SectionHeader num="06 /" title="Certifications" />
-
-              <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                {portfolioData.certifications.length > 0 ? (
-                  portfolioData.certifications.map((cert, idx) => (
-                    <Reveal
-                      key={idx}
-                      delay={Math.min(idx * 80, 480)}
-                      className="border border-border bg-surface overflow-hidden flex flex-col group hover:border-primary/50 transition-colors"
-                    >
-                      {cert.image && (
-                        <div className="w-full h-48 overflow-hidden bg-background">
-                          <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
-                        </div>
-                      )}
-                      <div className="p-6 flex flex-col flex-grow">
-                        <h4 className="font-bold text-lg leading-tight mb-2">{cert.title}</h4>
-                        <div className="font-mono text-sm text-textMuted mb-6 flex-grow">{cert.issuer} • {cert.date}</div>
-                        {cert.link && (
-                          <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-primary flex items-center gap-2 hover:underline w-fit">
-                            VERIFY CREDENTIAL <ExternalLink size={12} />
-                          </a>
-                        )}
-                      </div>
-                    </Reveal>
-                  ))
-                ) : (
-                  <div className="col-span-12 py-12 flex justify-center text-textMuted font-mono text-sm bg-surface/30">
-                    No active certifications to display.
                   </div>
-                )}
-              </div>
-            </div>
-          </section>
+                </div>
+              </section>
+
+              {/* CERTIFICATIONS SECTION */}
+              <section id="certifications" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
+                <div className="grid grid-cols-12 gap-6">
+                  <SectionHeader num="06 /" title="Certifications" />
+
+                  <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                    {portfolioData.certifications.length > 0 ? (
+                      portfolioData.certifications.map((cert, idx) => (
+                        <Reveal
+                          key={idx}
+                          delay={Math.min(idx * 80, 480)}
+                          className="border border-border bg-surface overflow-hidden flex flex-col group hover:border-primary/50 transition-colors"
+                        >
+                          {cert.image && (
+                            <div className="w-full h-48 overflow-hidden bg-background">
+                              <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+                            </div>
+                          )}
+                          <div className="p-6 flex flex-col flex-grow">
+                            <h4 className="font-bold text-lg leading-tight mb-2">{cert.title}</h4>
+                            <div className="font-mono text-sm text-textMuted mb-6 flex-grow">{cert.issuer} • {cert.date}</div>
+                            {cert.link && (
+                              <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-primary flex items-center gap-2 hover:underline w-fit">
+                                VERIFY CREDENTIAL <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        </Reveal>
+                      ))
+                    ) : (
+                      <div className="col-span-12 py-12 flex justify-center text-textMuted font-mono text-sm bg-surface/30">
+                        No active certifications to display.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
             </>
           )}
 
           {/* RESUME SECTION */}
           {showResume && portfolioData.resume.exists && (
-          <section id="resume" className="w-full h-screen pt-[100px] pb-12 flex flex-col items-center justify-center bg-background">
-            <div className="w-full max-w-[850px] h-full shadow-2xl relative">
-              <iframe 
-                src={`${portfolioData.resume.pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
-                className="w-full h-full border-none bg-white rounded-sm"
-                title="Resume"
-              />
-              <div className="absolute -bottom-16 w-full flex justify-center">
-                <a href={portfolioData.resume.pdfUrl} download className="px-6 py-3 border border-border text-textMain hover:border-primary hover:text-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2">
-                  Download PDF
-                </a>
+            <section id="resume" className="w-full h-screen pt-[100px] pb-12 flex flex-col items-center justify-center bg-background">
+              <div className="w-full max-w-[850px] h-full shadow-2xl relative">
+                <iframe
+                  src={`${portfolioData.resume.pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                  className="w-full h-full border-none bg-white rounded-sm"
+                  title="Resume"
+                />
+                <div className="absolute -bottom-16 w-full flex justify-center">
+                  <a href={portfolioData.resume.pdfUrl} download className="px-6 py-3 border border-border text-textMain hover:border-primary hover:text-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2">
+                    Download PDF
+                  </a>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
           )}
 
           {/* CONTACT SECTION */}
           {showContact && (
-          <section id="contact" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
-            <div className="grid grid-cols-12 gap-6">
-              <Reveal className="col-span-12 mb-16">
-                <h2 className="text-[clamp(3rem,8vw,6rem)] font-bold tracking-tighter uppercase leading-none">
-                  Let's Work <br /><span className="text-primary">Together.</span>
-                </h2>
-              </Reveal>
-              <Reveal delay={200} className="col-span-12 lg:col-span-5 mb-12 lg:mb-0">
-                <h3 className="text-3xl font-bold mb-4 uppercase tracking-tighter">Let's Connect</h3>
-                <p className="text-xl text-textMuted mb-12">
-                  Find me on these platforms or reach out directly
-                </p>
+            <section id="contact" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
+              <div className="grid grid-cols-12 gap-6">
+                <Reveal className="col-span-12 mb-16">
+                  <h2 className="text-[clamp(3rem,8vw,6rem)] font-bold tracking-tighter uppercase leading-none">
+                    Let's Work <br /><span className="text-primary">Together.</span>
+                  </h2>
+                </Reveal>
+                <Reveal delay={200} className="col-span-12 lg:col-span-5 mb-12 lg:mb-0">
+                  <h3 className="text-3xl font-bold mb-4 uppercase tracking-tighter">Let's Connect</h3>
+                  <p className="text-xl text-textMuted mb-12">
+                    Find me on these platforms or reach out directly
+                  </p>
 
-                <div className="flex flex-col gap-6">
-                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Github size={24} />
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg group-hover:text-primary transition-colors">GitHub</div>
-                      <div className="text-textMuted font-mono text-sm">Check out my code and projects</div>
-                    </div>
-                  </a>
+                  <div className="flex flex-col gap-6">
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                        <Github size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg group-hover:text-primary transition-colors">GitHub</div>
+                        <div className="text-textMuted font-mono text-sm">Check out my code and projects</div>
+                      </div>
+                    </a>
 
-                  <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Linkedin className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg group-hover:text-primary transition-colors">LinkedIn</div>
-                      <div className="text-textMuted font-mono text-sm">Connect with me professionally</div>
-                    </div>
-                  </a>
+                    <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                        <Linkedin className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg group-hover:text-primary transition-colors">LinkedIn</div>
+                        <div className="text-textMuted font-mono text-sm">Connect with me professionally</div>
+                      </div>
+                    </a>
 
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Instagram className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg group-hover:text-primary transition-colors">Instagram</div>
-                      <div className="text-textMuted font-mono text-sm">Follow me for updates and behind-the-scenes</div>
-                    </div>
-                  </a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                        <Instagram className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg group-hover:text-primary transition-colors">Instagram</div>
+                        <div className="text-textMuted font-mono text-sm">Follow me for updates and behind-the-scenes</div>
+                      </div>
+                    </a>
 
-                  <a href="mailto:umeshtemburwar2002@gmail.com" className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Mail size={24} />
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg group-hover:text-primary transition-colors">Email</div>
-                      <div className="text-textMuted font-mono text-sm">Send me a direct email</div>
-                    </div>
-                  </a>
-                </div>
-              </Reveal>
-              <Reveal delay={400} className="col-span-12 lg:col-span-6 lg:col-start-7">
-                <form
-                  ref={formRef}
-                  onSubmit={sendEmail}
-                  className="flex flex-col gap-8"
-                >
-                  <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                    <input name="from_name" type="text" placeholder="Your name" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
+                    <a href="mailto:umeshtemburwar2002@gmail.com" className="flex items-center gap-6 group">
+                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                        <Mail size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg group-hover:text-primary transition-colors">Email</div>
+                        <div className="text-textMuted font-mono text-sm">Send me a direct email</div>
+                      </div>
+                    </a>
                   </div>
-                  <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                    <input name="from_email" type="email" placeholder="you@email.com" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
-                  </div>
-                  <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                    <input name="subject" type="text" placeholder="Job opportunity / Project inquiry" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
-                  </div>
-                  <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                    <textarea name="message" placeholder="Tell me about your project or opportunity..." required rows={4} className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 resize-y text-textMain" />
-                  </div>
+                </Reveal>
+                <Reveal delay={400} className="col-span-12 lg:col-span-6 lg:col-start-7">
+                  <form
+                    ref={formRef}
+                    onSubmit={sendEmail}
+                    className="flex flex-col gap-8"
+                  >
+                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
+                      <input name="from_name" type="text" placeholder="Your name" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
+                    </div>
+                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
+                      <input name="from_email" type="email" placeholder="you@email.com" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
+                    </div>
+                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
+                      <input name="subject" type="text" placeholder="Job opportunity / Project inquiry" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
+                    </div>
+                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
+                      <textarea name="message" placeholder="Tell me about your project or opportunity..." required rows={4} className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 resize-y text-textMain" />
+                    </div>
 
-                  {submitStatus === 'success' && (
-                    <div className="text-[#56D8E8] font-mono text-sm">Message sent successfully!</div>
-                  )}
-                  {submitStatus === 'error' && (
-                    <div className="text-red-500 font-mono text-sm">Unable to send your message. Please try again.</div>
-                  )}
+                    {submitStatus === 'success' && (
+                      <div className="text-[#56D8E8] font-mono text-sm">Message sent successfully!</div>
+                    )}
+                    {submitStatus === 'error' && (
+                      <div className="text-red-500 font-mono text-sm">Unable to send your message. Please try again.</div>
+                    )}
 
-                  <button type="submit" disabled={isSubmitting} className="self-start px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
-                    {isSubmitting ? 'Sending...' : 'Send Message'} {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 transition-transform" />}
-                  </button>
-                </form>
-              </Reveal>
-            </div>
-          </section>
+                    <button type="submit" disabled={isSubmitting} className="self-start px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
+                      {isSubmitting ? 'Sending...' : 'Send Message'} {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 transition-transform" />}
+                    </button>
+                  </form>
+                </Reveal>
+              </div>
+            </section>
           )}
         </main>
 
