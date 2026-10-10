@@ -762,25 +762,52 @@ const App = () => {
 
                   <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                     {portfolioData.certifications.length > 0 ? (
-                      portfolioData.certifications.map((cert, idx) => (
+                      portfolioData.certifications.map((cert: { title: string; issuer: string; date: string; link: string; image: string; credentialType?: string; topics?: string[]; hasPdf?: boolean }, idx: number) => (
                         <Reveal
                           key={idx}
                           delay={Math.min(idx * 80, 480)}
-                          className="border border-border bg-surface overflow-hidden flex flex-col group hover:border-primary/50 transition-colors"
+                          className="border border-border bg-surface flex flex-col group hover:border-primary/50 transition-colors relative overflow-hidden"
                         >
                           {cert.image && (
-                            <div className="w-full h-48 overflow-hidden bg-background">
-                              <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+                            <div className="w-full h-40 overflow-hidden bg-background">
+                              <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60 group-hover:opacity-80" />
                             </div>
                           )}
                           <div className="p-6 flex flex-col flex-grow">
-                            <h4 className="font-bold text-lg leading-tight mb-2">{cert.title}</h4>
-                            <div className="font-mono text-sm text-textMuted mb-6 flex-grow">{cert.issuer} • {cert.date}</div>
-                            {cert.link && (
-                              <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-primary flex items-center gap-2 hover:underline w-fit">
-                                VERIFY CREDENTIAL <ExternalLink size={12} />
-                              </a>
+                            {cert.credentialType && (
+                              <div className="text-[10px] font-mono text-primary uppercase tracking-widest mb-3">
+                                {cert.credentialType}
+                              </div>
                             )}
+                            <h4 className="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">{cert.title}</h4>
+                            <div className="font-mono text-xs text-textMuted mb-4">{cert.issuer} • {cert.date}</div>
+                            
+                            {cert.topics && cert.topics.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+                                {cert.topics.slice(0, 4).map((topic: string) => (
+                                  <span key={topic} className="font-mono text-[10px] text-textMuted bg-background border border-border px-2 py-1">{topic}</span>
+                                ))}
+                                {cert.topics.length > 4 && (
+                                  <span className="font-mono text-[10px] text-textMuted bg-background border border-border px-2 py-1">+{cert.topics.length - 4}</span>
+                                )}
+                              </div>
+                            )}
+                            
+                            <div className="mt-auto pt-4 border-t border-border/50">
+                              {cert.link && cert.hasPdf !== false ? (
+                                <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-primary flex items-center gap-2 hover:underline w-fit">
+                                  VIEW CERTIFICATE <ExternalLink size={12} />
+                                </a>
+                              ) : cert.link ? (
+                                <span className="text-xs font-mono text-textMuted flex items-center gap-2 opacity-50 cursor-not-allowed w-fit">
+                                  CERTIFICATE PDF COMING SOON
+                                </span>
+                              ) : (
+                                <span className="text-xs font-mono text-textMuted flex items-center gap-2 opacity-50 cursor-not-allowed w-fit">
+                                  CREDENTIAL UNAVAILABLE
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </Reveal>
                       ))

@@ -145,11 +145,32 @@ export const portfolioData = {
   ],
   certifications: [
     {
+      title: "Data Engineering on AWS – Foundations",
+      issuer: "AWS Training & Certification",
+      date: "December 03, 2025",
+      link: "/certificates/data-engineering-aws-foundations.pdf",
+      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
+      credentialType: "Training Completion Certificate",
+      topics: ["Data pipelines", "ETL/ELT", "Data lakes", "Data warehousing", "Amazon S3", "AWS Glue", "AWS Lambda", "Amazon Redshift", "Amazon Athena"],
+      hasPdf: false
+    },
+    {
+      title: "Fundamentals of Machine Learning and Artificial Intelligence",
+      issuer: "AWS Training & Certification",
+      date: "November 17, 2025",
+      link: "/certificates/aws-fundamentals-machine-learning-artificial-intelligence.pdf",
+      image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
+      credentialType: "Training Completion Certificate",
+      topics: ["Fundamentals of Machine Learning", "Artificial Intelligence", "AWS-based AI/ML learning"],
+      hasPdf: false
+    },
+    {
       title: "JavaScript Algorithms and Data Structures",
       issuer: "freeCodeCamp",
       date: "2024",
       link: "",
       image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80",
+      hasPdf: false
     },
     {
       title: "Responsive Web Design",
@@ -157,6 +178,7 @@ export const portfolioData = {
       date: "2023",
       link: "",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+      hasPdf: false
     },
     {
       title: "Introduction to Cybersecurity",
@@ -164,8 +186,9 @@ export const portfolioData = {
       date: "2024",
       link: "",
       image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+      hasPdf: false
     },
-  ] as Array<{ title: string; issuer: string; date: string; link: string; image: string }>,
+  ] as Array<{ title: string; issuer: string; date: string; link: string; image: string; credentialType?: string; topics?: string[]; hasPdf?: boolean }>,
   resume: {
     // TODO: Place your PDF file in the public/resume/ folder and update this path if different
     pdfUrl: "/UMESH-TEMBURWAR_resume.pdf",
