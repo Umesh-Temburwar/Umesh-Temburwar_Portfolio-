@@ -83,12 +83,12 @@ export const portfolioData = {
       tech: ["React.js", "Tailwind CSS"],
       status: "Completed",
       // TODO: Add GitHub URL for ByteFest
-      githubUrl: "",
+      githubUrl: "https://github.com/umeshtemburwar2002-alt/ByteFest2K25-Official_Website",
       // TODO: Add Live Demo URL if available
-      liveUrl: "https://bytefest2k25.netlify.app",
+      liveUrl: "https://bytefest2k25.vercel.app",
       // TODO: Add an array of screenshot paths here
       screenshots: [],
-      coverImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      coverImage: "/bytefest2k25.png",
     },
     {
       id: "ai-forensics",
