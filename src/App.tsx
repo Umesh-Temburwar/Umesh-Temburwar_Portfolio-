@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValue, useAnimationFrame, useMotionValueEvent, LayoutGroup } from 'framer-motion';
-import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send } from 'lucide-react';
+import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send, Menu } from 'lucide-react';
 import { IconLinkedin as Linkedin, IconInstagram as Instagram } from '@/components/icons/BrandIcons';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -115,6 +115,7 @@ const SectionHeader = ({ num, title }: { num: string, title: string }) => (
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
 
@@ -170,7 +171,51 @@ const NavBar = () => {
         })}
       </div>
 
-      <Link to="/contact" className="md:hidden font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</Link>
+      <div className="md:hidden flex items-center gap-4">
+        <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 text-textMain hover:text-primary transition-colors">
+          <Menu size={24} />
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] bg-surface/95 backdrop-blur-xl flex flex-col p-6 border-l border-border"
+          >
+            <div className="flex justify-end pt-2 pr-2">
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-textMain hover:text-primary transition-colors border border-border rounded-full hover:border-primary">
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex flex-col items-center justify-center flex-grow gap-10">
+              {portfolioData.header.navLinks.map((link, i) => {
+                const isActive = location.pathname === link.href;
+                return (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.1 }}
+                  >
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-4xl font-bold uppercase tracking-tighter ${isActive ? 'text-primary' : 'text-textMain hover:text-primary'} transition-colors`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
