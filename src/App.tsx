@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValue, useAnimationFrame, useMotionValueEvent, LayoutGroup } from 'framer-motion';
 import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send } from 'lucide-react';
+import { IconLinkedin as Linkedin, IconInstagram as Instagram } from '@/components/icons/BrandIcons';
 import { useLocation, Link } from 'react-router-dom';
 
 import emailjs from '@emailjs/browser';
@@ -76,31 +77,7 @@ const Github = ({ size = 24, className = '', ...props }: React.SVGProps<SVGSVGEl
 
 
 // --- HOOKS ---
-const useActiveSection = (sectionIds: string[]) => {
-  const [activeSection, setActiveSection] = useState('');
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-20% 0px -80% 0px' }
-    );
-
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, [sectionIds]);
-
-  return activeSection;
-};
+// Scroll spy hook removed
 
 // --- MARQUEE ---
 const Marquee = ({ items }: { items: string[] }) => {
@@ -135,7 +112,7 @@ const SectionHeader = ({ num, title }: { num: string, title: string }) => (
   </div>
 );
 
-const NavBar = ({ activeSection }: { activeSection: string }) => {
+const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [imageError, setImageError] = useState(false);
   const { scrollY } = useScroll();
@@ -147,36 +124,28 @@ const NavBar = ({ activeSection }: { activeSection: string }) => {
   });
   
   return (
-    <nav className={`fixed w-full top-0 z-50 p-4 md:p-6 flex justify-between items-center transition-all duration-300 ${isScrolled ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm' : 'mix-blend-difference'}`}>
-      <div className="flex items-center gap-4 relative min-w-[120px] lg:min-w-[250px] h-10">
-        <AnimatePresence>
-          {isScrolled ? (
-            <Link to="/" key="compact-identity" className="absolute left-0 flex items-center gap-2 sm:gap-3 pointer-events-auto w-max z-10 group cursor-pointer">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2 sm:gap-3">
-              <motion.div layoutId="profile-photo-container" transition={{ type: "spring", stiffness: 300, damping: 25 }} className="w-10 h-10 flex-shrink-0 overflow-hidden" style={{ borderRadius: "9999px", border: "1px solid rgba(255,255,255,0.08)" }}>
-                {portfolioData.hero.profilePhoto && !imageError && (
-                  <img src={portfolioData.hero.profilePhoto} alt={portfolioData.hero.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300" onError={() => setImageError(true)} />
-                )}
-              </motion.div>
-              <div className="flex flex-col group-hover:opacity-80 transition-opacity">
-                <motion.span initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }} className="font-bold text-xs sm:text-sm leading-tight whitespace-nowrap">{portfolioData.hero.name}</motion.span>
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.3 }}
-                  className="text-[9px] sm:text-[10px] font-mono text-primary whitespace-nowrap overflow-hidden text-ellipsis max-w-[140px] sm:max-w-none"
-                >
-                  Full-Stack Developer
-                </motion.span>
-              </div>
-              </motion.div>
-            </Link>
-          ) : (
-            <Link to="/" key="logo" className="absolute left-0 font-bold text-xl tracking-tighter flex items-center h-full z-10 hover:text-primary transition-colors cursor-pointer">
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                {portfolioData.header.logo}
-              </motion.span>
-            </Link>
-          )}
-        </AnimatePresence>
+    <nav className={`fixed w-full top-0 z-50 p-4 md:p-6 flex justify-between items-center transition-all duration-300 ${isScrolled ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm' : 'bg-transparent'}`}>
+      <div className="flex items-center gap-4 relative min-w-[200px] h-10">
+        <Link to="/" className="flex items-center gap-3 w-max z-10 group cursor-pointer">
+          <div className="w-10 h-10 flex-shrink-0 overflow-hidden rounded-full border border-border group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)] transition-all duration-300 flex items-center justify-center bg-surface">
+            {portfolioData.hero.profilePhoto && !imageError ? (
+              <img 
+                src={portfolioData.hero.profilePhoto} 
+                alt={portfolioData.hero.name} 
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300" 
+                onError={() => setImageError(true)} 
+              />
+            ) : (
+              <span className="font-bold text-sm text-textMuted group-hover:text-primary transition-colors">UT</span>
+            )}
+          </div>
+          <div className="flex flex-col group-hover:opacity-80 transition-opacity">
+            <span className="font-bold text-sm leading-tight whitespace-nowrap">{portfolioData.hero.name}</span>
+            <span className="text-[10px] font-mono text-primary whitespace-nowrap">
+              {portfolioData.hero.title.split('|')[0].trim() || 'Developer'}
+            </span>
+          </div>
+        </Link>
       </div>
 
       <div className="hidden md:flex items-center gap-6">
@@ -225,29 +194,14 @@ const HeroVisual = ({ isLoaded }: { isLoaded: boolean }) => {
     >
       <div className="w-full h-full bg-surface relative z-10 overflow-hidden">
         {portfolioData.hero.profilePhoto && !imageError ? (
-          <>
-            <div className="absolute inset-0 w-full h-full">
-              <img
-                src={portfolioData.hero.profilePhoto}
-                alt={portfolioData.hero.name}
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-            <AnimatePresence>
-              {!isScrolled && (
-                <motion.div layoutId="profile-photo-container" transition={{ type: "spring", stiffness: 300, damping: 25 }} className="relative w-full h-full overflow-hidden" style={{ borderRadius: "0px", border: "1px solid transparent" }}>
-                  <img
-                    src={portfolioData.hero.profilePhoto}
-                    alt={portfolioData.hero.name}
-                    className="w-full h-full object-cover object-center"
-                    onError={() => setImageError(true)}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </>
+          <img
+            src={portfolioData.hero.profilePhoto}
+            alt={portfolioData.hero.name}
+            className="w-full h-full object-cover object-center"
+            onError={() => setImageError(true)}
+          />
         ) : (
-          <div className="w-full h-full flex items-center justify-center font-mono text-sm text-textMuted">Photo unavailable</div>
+          <div className="w-full h-full flex items-center justify-center font-mono text-sm text-textMuted bg-surface border border-border">UT</div>
         )}
       </div>
     </motion.div>
@@ -259,9 +213,7 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<typeof portfolioData.projects[0] | null>(null);
 
-  const sectionIds = ['hero', 'about', 'projects', 'skills', 'experience', 'education', 'certifications', 'contact'];
-  const activeSection = useActiveSection(sectionIds);
-
+  // Scroll spy unused since routing migration
 
 
   const location = useLocation();
@@ -436,7 +388,7 @@ const App = () => {
           aria-hidden="true"
         />
 
-        <NavBar activeSection={activeSection} />
+        <NavBar />
 
         <main>
           {showHomeContent && (
@@ -800,7 +752,7 @@ const App = () => {
 
                   <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                     <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Linkedin size={24} />
+                      <Linkedin className="w-6 h-6" />
                     </div>
                     <div>
                       <div className="font-bold text-lg group-hover:text-primary transition-colors">LinkedIn</div>
@@ -810,7 +762,7 @@ const App = () => {
 
                   <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                     <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                      <Instagram size={24} />
+                      <Instagram className="w-6 h-6" />
                     </div>
                     <div>
                       <div className="font-bold text-lg group-hover:text-primary transition-colors">Instagram</div>

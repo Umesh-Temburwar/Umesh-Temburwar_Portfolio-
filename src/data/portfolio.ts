@@ -27,7 +27,8 @@ export const portfolioData = {
     githubUrl: "",
     // TODO: Insert your actual LinkedIn URL here
     linkedinUrl: "",
-    // Profile photo for the Hero section
+    // Profile photo (Used for BOTH the Hero section and the dynamic NavBar logo)
+    // To update your photo and logo, simply replace the file in the public/ folder or change this path.
     profilePhoto: "/umesh.jpg",
   },
   about: {
