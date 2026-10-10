@@ -6,7 +6,9 @@ import {
   IconLeetcode,
   IconHackerrank,
   IconGeeksforgeeks,
+  IconInstagram,
 } from './icons/BrandIcons';
+import { Mail } from 'lucide-react';
 import { Reveal } from './Reveal';
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
@@ -15,6 +17,8 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
   LeetCode: IconLeetcode,
   HackerRank: IconHackerrank,
   GeeksforGeeks: IconGeeksforgeeks,
+  Instagram: IconInstagram,
+  Email: Mail,
 };
 
 interface SocialLinksProps {
@@ -23,7 +27,7 @@ interface SocialLinksProps {
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '' }) => {
   const activeLinks = profileLinks.filter(
-    (link) => link.url && link.url.startsWith('https://')
+    (link) => link.url && (link.url.startsWith('https://') || link.url.startsWith('mailto:'))
   );
 
   if (activeLinks.length === 0) return null;

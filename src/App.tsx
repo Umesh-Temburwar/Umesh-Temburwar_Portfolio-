@@ -575,6 +575,9 @@ const App = () => {
                           <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1">
                             VIEW DETAILS
                           </button>
+                          <a href={project.liveUrl || project.githubUrl || '#'} target={project.liveUrl || project.githubUrl ? "_blank" : "_self"} rel="noopener noreferrer" className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
+                            VIEW PROJECT <ExternalLink size={12} />
+                          </a>
                         </div>
                       </div>
                     </Reveal>

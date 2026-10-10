@@ -1,9 +1,11 @@
 // TODO: Replace with your actual URLs, emails, and file paths. 
 // Look for "TODO:" comments throughout this file.
 
-export const profileLinks: { name: 'LinkedIn' | 'GitHub' | 'LeetCode' | 'HackerRank' | 'GeeksforGeeks'; url: string }[] = [
+export const profileLinks: { name: 'LinkedIn' | 'GitHub' | 'LeetCode' | 'HackerRank' | 'GeeksforGeeks' | 'Instagram' | 'Email'; url: string }[] = [
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/umesh-temburwar-673555373/' }, // TODO: add my real profile URL
   { name: 'GitHub', url: 'https://github.com/umeshtemburwar2002-alt' }, // TODO: add my real profile URL
+  { name: 'Instagram', url: 'https://www.instagram.com/umesh_temburwar' },
+  { name: 'Email', url: 'mailto:umeshtemburwar2002@gmail.com' },
   { name: 'LeetCode', url: '' }, // TODO: add my real profile URL
   { name: 'HackerRank', url: '' }, // TODO: add my real profile URL
   { name: 'GeeksforGeeks', url: '' }, // TODO: add my real profile URL
@@ -46,7 +48,7 @@ export const portfolioData = {
       // TODO: Add GitHub URL for EdTech platform
       githubUrl: "",
       // TODO: Add Live Demo URL if available
-      liveUrl: "",
+      liveUrl: "https://edtechacademy.vercel.app",
       // TODO: Add an array of screenshot paths here
       screenshots: [],
       coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
@@ -77,7 +79,7 @@ export const portfolioData = {
       // TODO: Add GitHub URL for ByteFest
       githubUrl: "",
       // TODO: Add Live Demo URL if available
-      liveUrl: "",
+      liveUrl: "https://bytefest2k25.netlify.app",
       // TODO: Add an array of screenshot paths here
       screenshots: [],
       coverImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
