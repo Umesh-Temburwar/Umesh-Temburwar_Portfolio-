@@ -172,47 +172,33 @@ const NavBar = () => {
       </div>
 
       <div className="md:hidden flex items-center gap-4">
-        <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 text-textMain hover:text-primary transition-colors">
-          <Menu size={24} />
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-textMain hover:text-primary transition-colors">
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[100] bg-surface/95 backdrop-blur-xl flex flex-col p-6 border-l border-border"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-16 right-4 md:hidden bg-surface border border-border shadow-2xl p-4 flex flex-col gap-4 min-w-[200px] z-[100]"
           >
-            <div className="flex justify-end pt-2 pr-2">
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-textMain hover:text-primary transition-colors border border-border rounded-full hover:border-primary">
-                <X size={24} />
-              </button>
-            </div>
-            
-            <div className="flex flex-col items-center justify-center flex-grow gap-10">
-              {portfolioData.header.navLinks.map((link, i) => {
-                const isActive = location.pathname === link.href;
-                return (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.1 }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`text-4xl font-bold uppercase tracking-tighter ${isActive ? 'text-primary' : 'text-textMain hover:text-primary'} transition-colors`}
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
+            {portfolioData.header.navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-lg font-mono ${isActive ? 'text-primary' : 'text-textMain hover:text-primary'} transition-colors border-b border-border/50 pb-2 last:border-0 last:pb-0`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
