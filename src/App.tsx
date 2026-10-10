@@ -125,84 +125,86 @@ const NavBar = () => {
   });
 
   return (
-    <nav className={`fixed w-full top-0 z-50 p-4 md:p-6 flex justify-between items-center transition-all duration-300 ${isScrolled ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm' : 'bg-transparent'}`}>
-      <div className="flex items-center gap-4 relative min-w-[200px] h-10">
-        <Link to="/" className="flex items-center gap-3 w-max z-10 group cursor-pointer">
-          <div className="w-10 h-10 flex-shrink-0 overflow-hidden rounded-full border border-border group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)] transition-all duration-300 flex items-center justify-center bg-surface">
-            {portfolioData.hero.profilePhoto && !imageError ? (
-              <img
-                src={portfolioData.hero.profilePhoto}
-                alt={portfolioData.hero.name}
-                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <span className="font-bold text-sm text-textMuted group-hover:text-primary transition-colors">UT</span>
-            )}
-          </div>
-          <div className="flex flex-col group-hover:opacity-80 transition-opacity">
-            <span className="font-bold text-sm leading-tight whitespace-nowrap">{portfolioData.hero.name}</span>
-            <span className="text-[10px] font-mono text-primary whitespace-nowrap">
-              {portfolioData.hero.title.split('|')[0].trim() || 'Developer'}
-            </span>
-          </div>
-        </Link>
-      </div>
-
-      <div className="hidden md:flex items-center gap-6">
-        {portfolioData.header.navLinks.map((link) => {
-          const isActive = location.pathname === link.href;
-          return (
-            <Link
-              key={link.name}
-              to={link.href}
-              className={`relative font-mono text-sm transition-colors py-2 ${isActive ? 'text-primary' : 'text-textMuted hover:text-textMain'}`}
-            >
-              {link.name}
-              {isActive && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm' : 'bg-transparent'}`}>
+      <div className="max-w-[1280px] mx-auto w-full p-4 md:p-6 flex justify-between items-center relative">
+        <div className="flex items-center gap-4 relative min-w-[200px] h-10">
+          <Link to="/" className="flex items-center gap-3 w-max z-10 group cursor-pointer">
+            <div className="w-10 h-10 flex-shrink-0 overflow-hidden rounded-full border border-border group-hover:border-primary group-hover:shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)] transition-all duration-300 flex items-center justify-center bg-surface">
+              {portfolioData.hero.profilePhoto && !imageError ? (
+                <img
+                  src={portfolioData.hero.profilePhoto}
+                  alt={portfolioData.hero.name}
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                  onError={() => setImageError(true)}
                 />
+              ) : (
+                <span className="font-bold text-sm text-textMuted group-hover:text-primary transition-colors">UT</span>
               )}
-            </Link>
-          );
-        })}
-      </div>
+            </div>
+            <div className="flex flex-col group-hover:opacity-80 transition-opacity">
+              <span className="font-bold text-sm leading-tight whitespace-nowrap">{portfolioData.hero.name}</span>
+              <span className="text-[10px] font-mono text-primary whitespace-nowrap">
+                {portfolioData.hero.title.split('|')[0].trim() || 'Developer'}
+              </span>
+            </div>
+          </Link>
+        </div>
 
-      <div className="md:hidden flex items-center gap-4">
-        <Link to="/contact" className="font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</Link>
-        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-textMain hover:text-primary transition-colors">
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+        <div className="hidden md:flex items-center gap-6">
+          {portfolioData.header.navLinks.map((link) => {
+            const isActive = location.pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`relative font-mono text-sm transition-colors py-2 ${isActive ? 'text-primary' : 'text-textMuted hover:text-textMain'}`}
+              >
+                {link.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-16 right-4 md:hidden bg-surface border border-border shadow-2xl p-4 flex flex-col gap-4 min-w-[200px] z-[100]"
-          >
-            {portfolioData.header.navLinks.map((link) => {
-              const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-mono ${isActive ? 'text-primary' : 'text-textMain hover:text-primary'} transition-colors border-b border-border/50 pb-2 last:border-0 last:pb-0`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="md:hidden flex items-center gap-4">
+          <Link to="/contact" className="font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</Link>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-textMain hover:text-primary transition-colors">
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-16 right-4 md:hidden bg-surface border border-border shadow-2xl p-4 flex flex-col gap-4 min-w-[200px] z-[100]"
+            >
+              {portfolioData.header.navLinks.map((link) => {
+                const isActive = location.pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-lg font-mono ${isActive ? 'text-primary' : 'text-textMain hover:text-primary'} transition-colors border-b border-border/50 pb-2 last:border-0 last:pb-0`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </nav>
   );
 };
@@ -219,22 +221,37 @@ const HeroVisual = ({ isLoaded }: { isLoaded: boolean }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-      transition={{ duration: 1, delay: 0.2 }}
-      className="w-full aspect-[4/5] border border-border p-2 bg-surface/50 relative group"
+      initial={{ opacity: 0, y: 16 }}
+      animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.8, delay: 0.8 }}
+      className="w-full aspect-[4/5] relative group lg:max-w-none max-w-[420px] md:max-w-[420px] sm:max-w-[320px] mx-auto"
     >
-      <div className="w-full h-full bg-surface relative z-10 overflow-hidden">
-        {portfolioData.hero.profilePhoto && !imageError ? (
-          <img
-            src={portfolioData.hero.profilePhoto}
-            alt={portfolioData.hero.name}
-            className="w-full h-full object-cover object-center"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center font-mono text-sm text-textMuted bg-surface border border-border">UT</div>
-        )}
+      <div className="absolute inset-0 bg-surface/50 border border-border p-2">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,165,36,0.08)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-[1.5px] border-l-[1.5px] border-primary" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-[1.5px] border-r-[1.5px] border-primary" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1.5px] border-l-[1.5px] border-primary" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1.5px] border-r-[1.5px] border-primary" />
+        <div className="w-full h-full bg-surface relative z-10 overflow-hidden">
+          {portfolioData.hero.profilePhoto && !imageError ? (
+            <img
+              src={portfolioData.hero.profilePhoto}
+              alt={portfolioData.hero.name}
+              width={640}
+              height={800}
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-full object-cover object-top"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center font-mono text-sm text-textMuted bg-surface border border-border">UT</div>
+          )}
+        </div>
+      </div>
+      <div className="hidden sm:block absolute -left-4 -bottom-4 max-w-[30%] bg-[#11151B] border border-border p-3 z-20 shadow-xl">
+        <div className="font-mono text-[12px] text-textMain leading-tight whitespace-nowrap">{portfolioData.hero.idCard?.line1}</div>
+        <div className="font-mono text-[10px] text-textMuted mt-1">{portfolioData.hero.idCard?.line2}</div>
       </div>
     </motion.div>
   );
@@ -245,7 +262,7 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedProject, setSelectedProject] = useState<typeof portfolioData.projects[0] | null>(null);
 
-  // Scroll spy unused since routing migration
+  const { scrollY } = useScroll();
 
 
   const location = useLocation();
@@ -426,13 +443,13 @@ const App = () => {
           {showHomeContent && (
             <>
               {/* HERO SECTION */}
-              <section id="hero" ref={heroRef} className="min-h-screen relative flex flex-col justify-center px-6 pt-24 pb-12 max-w-[1920px] mx-auto overflow-hidden">
+              <section id="hero" ref={heroRef} className="min-h-[calc(100svh-80px)] relative flex flex-col justify-center px-4 md:px-6 pt-24 pb-12 w-full mx-auto overflow-hidden">
                 {/* Subtle radial vignette */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
                 <div
                   ref={heroVisualRef}
-                  className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 relative z-10 items-center"
+                  className="w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10 items-center"
                 >
 
                   {/* Left Column: Text & CTAs */}
@@ -440,9 +457,10 @@ const App = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ duration: 0.8, delay: 0.2 }}
-                      className="font-mono text-primary mb-6"
+                      transition={{ duration: 0.8, delay: 0.1 }}
+                      className="font-mono text-textMuted mb-6 flex items-center gap-2"
                     >
+                      <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse motion-reduce:animate-none"></span>
                       Open to software engineering roles
                     </motion.div>
 
@@ -450,20 +468,20 @@ const App = () => {
                       <motion.h1
                         initial={{ y: "100%" }}
                         animate={isLoaded ? { y: 0 } : { y: "100%" }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                        className="font-bold leading-[0.95] tracking-tighter uppercase break-normal min-w-0"
-                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+                        className="font-bold leading-[0.95] tracking-tight uppercase break-normal min-w-0"
+                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)", letterSpacing: "-0.02em" }}
                       >
                         {portfolioData.hero.name.split(' ')[0]}
                       </motion.h1>
                     </div>
-                    <div className="overflow-hidden mb-8 flex gap-4">
+                    <div className="overflow-hidden mb-6 flex gap-4">
                       <motion.h1
                         initial={{ y: "100%" }}
                         animate={isLoaded ? { y: 0 } : { y: "100%" }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-                        className="font-bold leading-[0.95] tracking-tighter uppercase text-textMuted break-normal min-w-0"
-                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.26 }}
+                        className="font-bold leading-[0.95] tracking-tight uppercase text-textMuted break-normal min-w-0"
+                        style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)", letterSpacing: "-0.02em" }}
                       >
                         {portfolioData.hero.name.split(' ').slice(1).join(' ')}
                       </motion.h1>
@@ -472,8 +490,18 @@ const App = () => {
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-                      transition={{ duration: 0.8, delay: 0.6 }}
-                      className="text-xl md:text-2xl max-w-2xl text-textMuted mb-12 leading-relaxed"
+                      transition={{ duration: 0.8, delay: 0.34 }}
+                      className="font-mono text-textMuted mb-6 flex items-center gap-2"
+                    >
+                      <span className="inline-block w-2 h-2 bg-primary"></span>
+                      {portfolioData.hero.role}
+                    </motion.p>
+
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.8, delay: 0.42 }}
+                      className="text-xl md:text-2xl max-w-2xl text-textMuted mb-6 leading-relaxed"
                     >
                       I build full-stack web applications using React, Node.js and TypeScript, with a focus on scalable architecture and clean interfaces.
                     </motion.p>
@@ -481,8 +509,19 @@ const App = () => {
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-                      transition={{ duration: 0.8, delay: 0.8 }}
-                      className="flex flex-col sm:flex-row gap-6 w-full"
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                      className="flex flex-wrap gap-2 mb-10"
+                    >
+                      {portfolioData.hero.heroStack?.map(tech => (
+                        <span key={tech} className="font-mono text-[12px] border border-white/10 text-textMuted px-3 py-1 rounded-sm">{tech}</span>
+                      ))}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.8, delay: 0.58 }}
+                      className="flex flex-col sm:flex-row gap-6 w-full mb-10"
                     >
                       <Link to="/projects" className="px-8 py-4 bg-textMain text-background font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2">
                         View Projects <ArrowRight size={18} />
@@ -497,17 +536,32 @@ const App = () => {
                         </span>
                       )}
                     </motion.div>
-
-                    <SocialLinks className="mt-6 md:mt-8" />
+                    
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.8, delay: 0.66 }}
+                      className="flex flex-col sm:flex-row sm:items-center gap-4"
+                    >
+                      <span className="font-mono text-sm text-textMuted">Find me on</span>
+                      <SocialLinks />
+                    </motion.div>
                   </div>
-
-                  {/* Right Column: Visual Cluster */}
                   <div className="lg:col-span-5 flex justify-center lg:justify-end mt-12 lg:mt-0">
-                    <div className="w-full max-w-[320px] md:max-w-[420px] lg:max-w-full relative">
-                      <HeroVisual isLoaded={isLoaded} />
-                    </div>
+                    <HeroVisual isLoaded={isLoaded} />
                   </div>
                 </div>
+                
+                {/* Scroll Cue Desktop */}
+                <motion.div 
+                  className="hidden lg:flex absolute bottom-8 left-6 items-center gap-2 -rotate-90 origin-left"
+                  style={{ opacity: useTransform(scrollY, [0, 80], [1, 0]) }}
+                >
+                  <span className="font-mono text-[10px] text-textMuted uppercase tracking-widest">Scroll</span>
+                  <div className="w-12 h-[1px] bg-border relative overflow-hidden">
+                    <div className="absolute inset-0 w-full h-full bg-primary animate-scroll-line motion-reduce:animate-none" />
+                  </div>
+                </motion.div>
               </section>
 
               <Marquee items={allTech} />

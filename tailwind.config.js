@@ -16,6 +16,17 @@ export default {
         sans: ['Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
+      keyframes: {
+        'scroll-line': {
+          '0%': { transform: 'scaleX(0)', transformOrigin: 'left' },
+          '50%': { transform: 'scaleX(1)', transformOrigin: 'left' },
+          '50.1%': { transform: 'scaleX(1)', transformOrigin: 'right' },
+          '100%': { transform: 'scaleX(0)', transformOrigin: 'right' },
+        }
+      },
+      animation: {
+        'scroll-line': 'scroll-line 2s cubic-bezier(0.86, 0, 0.07, 1) infinite',
+      }
     },
   },
   plugins: [],

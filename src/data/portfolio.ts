@@ -23,8 +23,14 @@ export const portfolioData = {
   hero: {
     name: "Umesh Temburwar",
     title: "Computer Science Engineer | Full-Stack Developer | React · Node.js · TypeScript",
+    role: "Computer Science Engineer | Full-Stack Developer",
     subtitle: "B.Tech CSE Student (2022-2026)",
     description: "I am a fresh, passionate developer seeking software engineering roles, with a strong interest in full-stack web development, Python, AI automation, and cybersecurity.",
+    heroStack: ["React", "Node.js", "TypeScript", "MongoDB", "PostgreSQL"],
+    idCard: {
+      line1: "B.Tech CSE, 2022-2026",
+      line2: "Ambajogai, Maharashtra"
+    },
     // TODO: Insert your actual GitHub URL here
     githubUrl: "https://github.com/umeshtemburwar2002-alt",
     // TODO: Insert your actual LinkedIn URL here

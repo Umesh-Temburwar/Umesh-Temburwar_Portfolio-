@@ -54,7 +54,7 @@ export default function GatewayFlow({
       width = rect.width;
       height = rect.height;
       
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x to save GPU
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // Cap at 1.5x to save GPU
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       
