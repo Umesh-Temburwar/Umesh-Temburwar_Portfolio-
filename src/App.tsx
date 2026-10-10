@@ -170,7 +170,7 @@ const NavBar = () => {
         })}
       </div>
 
-      <a href="#contact" className="md:hidden font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</a>
+      <Link to="/contact" className="md:hidden font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</Link>
     </nav>
   );
 };
