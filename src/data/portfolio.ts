@@ -148,21 +148,21 @@ export const portfolioData = {
       title: "Data Engineering on AWS – Foundations",
       issuer: "AWS Training & Certification",
       date: "December 03, 2025",
-      link: "/certificates/data-engineering-aws-foundations.pdf",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
+      link: "/DATA Engineering ON AWS Foundations.pdf",
+      image: "/DATA Engineering ON AWS Foundations.png",
       credentialType: "Training Completion Certificate",
       topics: ["Data pipelines", "ETL/ELT", "Data lakes", "Data warehousing", "Amazon S3", "AWS Glue", "AWS Lambda", "Amazon Redshift", "Amazon Athena"],
-      hasPdf: false
+      hasPdf: true
     },
     {
       title: "Fundamentals of Machine Learning and Artificial Intelligence",
       issuer: "AWS Training & Certification",
       date: "November 17, 2025",
-      link: "/certificates/aws-fundamentals-machine-learning-artificial-intelligence.pdf",
-      image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80",
+      link: "/Foundation of Macine Learning and Artificial Intelligence.pdf",
+      image: "/Foundation of Macine Learning and Artificial Intelligence.png",
       credentialType: "Training Completion Certificate",
       topics: ["Fundamentals of Machine Learning", "Artificial Intelligence", "AWS-based AI/ML learning"],
-      hasPdf: false
+      hasPdf: true
     },
     {
       title: "JavaScript Algorithms and Data Structures",

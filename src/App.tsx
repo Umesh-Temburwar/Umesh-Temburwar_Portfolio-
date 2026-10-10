@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValue, useAnimationFrame, useMotionValueEvent, LayoutGroup } from 'framer-motion';
-import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send, Menu } from 'lucide-react';
-import { IconLinkedin as Linkedin, IconInstagram as Instagram } from '@/components/icons/BrandIcons';
-import { useLocation, Link } from 'react-router-dom';
+import { ArrowUp, ArrowRight, ExternalLink, X, Menu } from 'lucide-react';
+import { useLocation, Link, Routes, Route } from 'react-router-dom';
+import Projects from './pages/Projects';
+import Resume from './pages/Resume';
+import Contact from './pages/Contact';
 
-import emailjs from '@emailjs/browser';
 import { portfolioData } from './data/portfolio';
 import { Reveal } from '@/components/Reveal';
 import { SocialLinks } from '@/components/SocialLinks';
@@ -266,10 +267,6 @@ const App = () => {
 
 
   const location = useLocation();
-  const showProjects = location.pathname === '/projects';
-  const showContact = location.pathname === '/contact';
-  const showResume = location.pathname === '/resume';
-  const showHomeContent = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/skills' || location.pathname === '/experience' || location.pathname === '/education' || location.pathname === '/certifications';
 
   useEffect(() => {
     if (location.hash) {
@@ -282,55 +279,6 @@ const App = () => {
     }
   }, [location]);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (isSubmitting || !formRef.current) return;
-
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      if (import.meta.env.DEV) {
-        console.error("[EmailJS Diagnostics] Missing credentials:", {
-          hasServiceId: !!serviceId,
-          hasTemplateId: !!templateId,
-          hasPublicKey: !!publicKey
-        });
-      }
-      setSubmitStatus('error');
-      setIsSubmitting(false);
-      return;
-    }
-
-    emailjs.sendForm(serviceId, templateId, formRef.current, {
-      publicKey: publicKey,
-    })
-      .then((response) => {
-        if (import.meta.env.DEV) {
-          console.info("[EmailJS Diagnostics] Delivery success:", response.status, response.text);
-        }
-        setSubmitStatus('success');
-        formRef.current?.reset();
-      })
-      .catch((error: unknown) => {
-        if (import.meta.env.DEV) {
-          const errObj = error as { status?: number; text?: string };
-          console.error("[EmailJS Diagnostics] Delivery failed:", errObj?.status, errObj?.text || error);
-        }
-        setSubmitStatus('error');
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
-  };
 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
@@ -340,7 +288,6 @@ const App = () => {
   const educationRef = useRef<HTMLElement>(null);
   const { scrollYProgress: expScrollY } = useScroll({ target: experienceRef, offset: ["start center", "end center"] });
   const { scrollYProgress: eduScrollY } = useScroll({ target: educationRef, offset: ["start center", "end center"] });
-
   useEffect(() => {
     document.documentElement.classList.add('js-ready');
     return () => document.documentElement.classList.remove('js-ready');
@@ -440,8 +387,9 @@ const App = () => {
         <NavBar />
 
         <main>
-          {showHomeContent && (
-            <>
+          <Routes>
+            <Route path="/" element={
+              <>
               {/* HERO SECTION */}
               <section id="hero" ref={heroRef} className="min-h-[calc(100svh-80px)] relative flex flex-col justify-center px-4 md:px-6 pt-24 pb-12 w-full mx-auto overflow-hidden">
                 {/* Subtle radial vignette */}
@@ -594,55 +542,6 @@ const App = () => {
                 </div>
               </section>
 
-            </>
-          )}
-
-          {/* PROJECTS SECTION */}
-          {showProjects && (
-            <section id="projects" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
-              <div className="grid grid-cols-12 gap-6">
-                <SectionHeader num="02 /" title="Projects" />
-                <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-8">
-                  {portfolioData.projects.map((project, idx) => (
-                    <Reveal
-                      key={project.id}
-                      delay={Math.min(idx * 80, 480)}
-                      className="group border border-border bg-surface overflow-hidden flex flex-col h-full hover:border-primary/50 transition-colors"
-                    >
-                      <div className="w-full h-64 overflow-hidden relative cursor-pointer" onClick={() => setSelectedProject(project)}>
-                        <img src={project.coverImage} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-                      </div>
-                      <div className="p-8 flex flex-col flex-grow">
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-2xl font-bold cursor-pointer hover:text-primary transition-colors" onClick={() => setSelectedProject(project)}>{project.title}</h3>
-                          <span className="font-mono text-xs text-primary px-3 py-1 border border-primary/30 rounded-full shrink-0">{project.status}</span>
-                        </div>
-                        <p className="text-textMuted leading-relaxed mb-6 flex-grow">{project.shortDescription}</p>
-                        <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                          {project.tech.slice(0, 4).map(t => (
-                            <span key={t} className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">{t}</span>
-                          ))}
-                          {project.tech.length > 4 && <span className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">+{project.tech.length - 4}</span>}
-                        </div>
-                        <div className="flex gap-4">
-                          <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1">
-                            VIEW DETAILS
-                          </button>
-                          <a href={project.liveUrl || project.githubUrl || '#'} target={project.liveUrl || project.githubUrl ? "_blank" : "_self"} rel="noopener noreferrer" className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
-                            VIEW PROJECT <ExternalLink size={12} />
-                          </a>
-                        </div>
-                      </div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {showHomeContent && (
-            <>
               {/* SKILLS SECTION */}
               <section id="skills" className="py-32 px-6 max-w-7xl mx-auto scroll-mt-24">
                 <div className="grid grid-cols-12 gap-6">
@@ -697,7 +596,7 @@ const App = () => {
                             <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
                             <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
                               <span>{exp.company}</span>
-                              <span className="hidden md:inline">•</span>
+                              <span className="hidden md:inline">GÇó</span>
                               <span>{exp.duration}</span>
                             </div>
                           </div>
@@ -744,7 +643,7 @@ const App = () => {
                             <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
                             <div className="font-mono text-sm text-textMuted flex md:justify-end items-center gap-4">
                               <span>{edu.institution}</span>
-                              <span className="hidden md:inline">•</span>
+                              <span className="hidden md:inline">GÇó</span>
                               <span>{edu.duration}</span>
                             </div>
                           </div>
@@ -780,7 +679,7 @@ const App = () => {
                               </div>
                             )}
                             <h4 className="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">{cert.title}</h4>
-                            <div className="font-mono text-xs text-textMuted mb-4">{cert.issuer} • {cert.date}</div>
+                            <div className="font-mono text-xs text-textMuted mb-4">{cert.issuer} GÇó {cert.date}</div>
                             
                             {cert.topics && cert.topics.length > 0 && (
                               <div className="flex flex-wrap gap-2 mb-6 mt-auto">
@@ -820,117 +719,11 @@ const App = () => {
                 </div>
               </section>
             </>
-          )}
-
-          {/* RESUME SECTION */}
-          {showResume && portfolioData.resume.exists && (
-            <section id="resume" className="w-full h-screen pt-[100px] pb-12 flex flex-col items-center justify-center bg-background">
-              <div className="w-full max-w-[850px] h-full shadow-2xl relative">
-                <iframe
-                  src={`${portfolioData.resume.pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                  className="w-full h-full border-none bg-white rounded-sm"
-                  title="Resume"
-                />
-                <div className="absolute -bottom-16 w-full flex justify-center">
-                  <a href={portfolioData.resume.pdfUrl} download className="px-6 py-3 border border-border text-textMain hover:border-primary hover:text-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2">
-                    Download PDF
-                  </a>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* CONTACT SECTION */}
-          {showContact && (
-            <section id="contact" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
-              <div className="grid grid-cols-12 gap-6">
-                <Reveal className="col-span-12 mb-16">
-                  <h2 className="text-[clamp(3rem,8vw,6rem)] font-bold tracking-tighter uppercase leading-none">
-                    Let's Work <br /><span className="text-primary">Together.</span>
-                  </h2>
-                </Reveal>
-                <Reveal delay={200} className="col-span-12 lg:col-span-5 mb-12 lg:mb-0">
-                  <h3 className="text-3xl font-bold mb-4 uppercase tracking-tighter">Let's Connect</h3>
-                  <p className="text-xl text-textMuted mb-12">
-                    Find me on these platforms or reach out directly
-                  </p>
-
-                  <div className="flex flex-col gap-6">
-                    <a href="https://github.com/umeshtemburwar2002-alt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                        <Github size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg group-hover:text-primary transition-colors">GitHub</div>
-                        <div className="text-textMuted font-mono text-sm">Check out my code and projects</div>
-                      </div>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/umesh-temburwar-673555373/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                        <Linkedin className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg group-hover:text-primary transition-colors">LinkedIn</div>
-                        <div className="text-textMuted font-mono text-sm">Connect with me professionally</div>
-                      </div>
-                    </a>
-
-                    <a href="https://www.instagram.com/umesh_temburwar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                        <Instagram className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg group-hover:text-primary transition-colors">Instagram</div>
-                        <div className="text-textMuted font-mono text-sm">Follow me for updates and behind-the-scenes</div>
-                      </div>
-                    </a>
-
-                    <a href="mailto:umeshtemburwar2002@gmail.com" className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
-                        <Mail size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg group-hover:text-primary transition-colors">Email</div>
-                        <div className="text-textMuted font-mono text-sm">Send me a direct email</div>
-                      </div>
-                    </a>
-                  </div>
-                </Reveal>
-                <Reveal delay={400} className="col-span-12 lg:col-span-6 lg:col-start-7">
-                  <form
-                    ref={formRef}
-                    onSubmit={sendEmail}
-                    className="flex flex-col gap-8"
-                  >
-                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                      <input name="from_name" type="text" placeholder="Your name" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
-                    </div>
-                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                      <input name="from_email" type="email" placeholder="you@email.com" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
-                    </div>
-                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                      <input name="subject" type="text" placeholder="Job opportunity / Project inquiry" required className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 text-textMain" />
-                    </div>
-                    <div className="border-b border-border pb-2 focus-within:border-primary transition-colors">
-                      <textarea name="message" placeholder="Tell me about your project or opportunity..." required rows={4} className="w-full bg-transparent outline-none font-mono text-sm py-2 placeholder:text-textMuted/50 resize-y text-textMain" />
-                    </div>
-
-                    {submitStatus === 'success' && (
-                      <div className="text-[#56D8E8] font-mono text-sm">Message sent successfully!</div>
-                    )}
-                    {submitStatus === 'error' && (
-                      <div className="text-red-500 font-mono text-sm">Unable to send your message. Please try again.</div>
-                    )}
-
-                    <button type="submit" disabled={isSubmitting} className="self-start px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
-                      {isSubmitting ? 'Sending...' : 'Send Message'} {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 transition-transform" />}
-                    </button>
-                  </form>
-                </Reveal>
-              </div>
-            </section>
-          )}
+            } />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
         </main>
 
         <footer className="py-8 border-t border-border px-6">
@@ -1011,3 +804,5 @@ const App = () => {
 };
 
 export default App;
+
+
