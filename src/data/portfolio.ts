@@ -52,12 +52,12 @@ export const portfolioData = {
       tech: ["React.js", "Node.js", "Express.js", "Supabase", "PostgreSQL", "REST APIs"],
       status: "Completed",
       // TODO: Add GitHub URL for EdTech platform
-      githubUrl: "",
+      githubUrl: "https://github.com/umeshtemburwar2002-alt/Ed-tech-platform",
       // TODO: Add Live Demo URL if available
       liveUrl: "https://edtechacademy.vercel.app",
       // TODO: Add an array of screenshot paths here
       screenshots: [],
-      coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+      coverImage: "/EdTech Learning Platform.png",
     },
     {
       id: "inventory",

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { portfolioData } from '../data/portfolio';
 import { Reveal } from '../components/Reveal';
 import { IconLinkedin as Linkedin, IconInstagram as Instagram } from '../components/icons/BrandIcons';
 import { Mail } from 'lucide-react';

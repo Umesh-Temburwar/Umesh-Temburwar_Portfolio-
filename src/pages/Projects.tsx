@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ArrowRight, X } from 'lucide-react';
+import { ExternalLink, X, Info } from 'lucide-react';
+import { FiGithub } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolio';
 import { Reveal } from '../components/Reveal';
 
@@ -41,13 +42,20 @@ export default function Projects() {
                 ))}
                 {project.tech.length > 4 && <span className="font-mono text-xs text-textMuted bg-background border border-border px-2 py-1">+{project.tech.length - 4}</span>}
               </div>
-              <div className="flex gap-4">
-                <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1">
-                  VIEW DETAILS
+              <div className="flex flex-wrap gap-4 items-center">
+                <button onClick={() => setSelectedProject(project)} className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
+                  <Info size={12} /> VIEW DETAILS
                 </button>
-                <a href={project.liveUrl || project.githubUrl || '#'} target={project.liveUrl || project.githubUrl ? "_blank" : "_self"} rel="noopener noreferrer" className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
-                  VIEW PROJECT <ExternalLink size={12} />
-                </a>
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
+                    <FiGithub size={12} /> GITHUB
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-mono text-textMain border-b border-textMain hover:border-primary hover:text-primary transition-colors pb-1 flex items-center gap-1">
+                    <ExternalLink size={12} /> VIEW PROJECT
+                  </a>
+                )}
               </div>
             </div>
           </Reveal>
@@ -91,20 +99,10 @@ export default function Projects() {
               </div>
 
               <div className="p-8 md:p-12 flex flex-col gap-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 gap-8">
                   <div className="md:col-span-2">
                     <h3 className="text-sm font-mono text-primary uppercase tracking-widest mb-4">Overview</h3>
-                    <p className="text-textMuted text-lg leading-relaxed">{selectedProject.fullDescription || selectedProject.shortDescription}</p>
-                  </div>
-                  <div className="flex flex-col gap-6">
-                    <div>
-                      <h3 className="text-sm font-mono text-textMuted uppercase tracking-widest mb-2">Role</h3>
-                      <p className="text-textMain font-medium">{selectedProject.role}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-mono text-textMuted uppercase tracking-widest mb-2">Duration</h3>
-                      <p className="text-textMain font-mono text-sm">{selectedProject.duration}</p>
-                    </div>
+                    <p className="text-textMuted text-lg leading-relaxed">{selectedProject.description || selectedProject.shortDescription}</p>
                   </div>
                 </div>
 
@@ -116,7 +114,7 @@ export default function Projects() {
                   )}
                   {selectedProject.githubUrl && (
                     <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-border hover:border-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-2">
-                      View Code <ArrowRight size={16} />
+                      View Code <FiGithub size={16} />
                     </a>
                   )}
                 </div>
