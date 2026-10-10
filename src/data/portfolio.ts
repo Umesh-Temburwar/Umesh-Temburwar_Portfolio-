@@ -2,8 +2,8 @@
 // Look for "TODO:" comments throughout this file.
 
 export const profileLinks: { name: 'LinkedIn' | 'GitHub' | 'LeetCode' | 'HackerRank' | 'GeeksforGeeks'; url: string }[] = [
-  { name: 'LinkedIn', url: '' }, // TODO: add my real profile URL
-  { name: 'GitHub', url: '' }, // TODO: add my real profile URL
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/umesh-temburwar-673555373/' }, // TODO: add my real profile URL
+  { name: 'GitHub', url: 'https://github.com/umeshtemburwar2002-alt' }, // TODO: add my real profile URL
   { name: 'LeetCode', url: '' }, // TODO: add my real profile URL
   { name: 'HackerRank', url: '' }, // TODO: add my real profile URL
   { name: 'GeeksforGeeks', url: '' }, // TODO: add my real profile URL
@@ -24,9 +24,9 @@ export const portfolioData = {
     subtitle: "B.Tech CSE Student (2022-2026)",
     description: "I am a fresh, passionate developer seeking software engineering roles, with a strong interest in full-stack web development, Python, AI automation, and cybersecurity.",
     // TODO: Insert your actual GitHub URL here
-    githubUrl: "",
+    githubUrl: "https://github.com/umeshtemburwar2002-alt",
     // TODO: Insert your actual LinkedIn URL here
-    linkedinUrl: "",
+    linkedinUrl: "https://www.linkedin.com/in/umesh-temburwar-673555373/",
     // Profile photo (Used for BOTH the Hero section and the dynamic NavBar logo)
     // To update your photo and logo, simply replace the file in the public/ folder or change this path.
     profilePhoto: "/umesh.jpg",

@@ -172,6 +172,7 @@ const NavBar = () => {
       </div>
 
       <div className="md:hidden flex items-center gap-4">
+        <Link to="/contact" className="font-mono text-xs text-textMain border border-border px-3 py-1.5 hover:text-primary transition-colors">Get in touch</Link>
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-textMain hover:text-primary transition-colors">
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -771,7 +772,7 @@ const App = () => {
                   </p>
 
                   <div className="flex flex-col gap-6">
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                    <a href="https://github.com/umeshtemburwar2002-alt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                       <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
                         <Github size={24} />
                       </div>
@@ -781,7 +782,7 @@ const App = () => {
                       </div>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                    <a href="https://www.linkedin.com/in/umesh-temburwar-673555373/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                       <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
                         <Linkedin className="w-6 h-6" />
                       </div>
@@ -791,7 +792,7 @@ const App = () => {
                       </div>
                     </a>
 
-                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                    <a href="https://www.instagram.com/umesh_temburwar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                       <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
                         <Instagram className="w-6 h-6" />
                       </div>
