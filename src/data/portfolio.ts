@@ -1,0 +1,170 @@
+// TODO: Replace with your actual URLs, emails, and file paths. 
+// Look for "TODO:" comments throughout this file.
+
+export const profileLinks: { name: 'LinkedIn' | 'GitHub' | 'LeetCode' | 'HackerRank' | 'GeeksforGeeks'; url: string }[] = [
+  { name: 'LinkedIn', url: '' }, // TODO: add my real profile URL
+  { name: 'GitHub', url: '' }, // TODO: add my real profile URL
+  { name: 'LeetCode', url: '' }, // TODO: add my real profile URL
+  { name: 'HackerRank', url: '' }, // TODO: add my real profile URL
+  { name: 'GeeksforGeeks', url: '' }, // TODO: add my real profile URL
+];
+
+export const portfolioData = {
+  header: {
+    logo: "UMESH TEMBURWAR",
+    navLinks: [
+      { name: "Projects", href: "/projects" },
+      { name: "Resume", href: "/resume" },
+      { name: "Contact", href: "/contact" },
+    ]
+  },
+  hero: {
+    name: "Umesh Temburwar",
+    title: "Computer Science Engineer | Full-Stack Developer | React · Node.js · TypeScript",
+    subtitle: "B.Tech CSE Student (2022-2026)",
+    description: "I am a fresh, passionate developer seeking software engineering roles, with a strong interest in full-stack web development, Python, AI automation, and cybersecurity.",
+    // TODO: Insert your actual GitHub URL here
+    githubUrl: "",
+    // TODO: Insert your actual LinkedIn URL here
+    linkedinUrl: "",
+    // Profile photo for the Hero section
+    profilePhoto: "/umesh.jpg",
+  },
+  about: {
+    title: "About Me",
+    content: "I am a Computer Science Engineering student with a solid foundation in building full-stack web applications. My development journey revolves around continuous learning in databases, modern web development, and emerging AI tools. I enjoy translating complex problems into clean, scalable code and am excited to bring my technical skills to professional software engineering roles."
+  },
+  projects: [
+    {
+      id: "edtech",
+      title: "EdTech Learning Platform",
+      shortDescription: "A full-stack learning platform with roles for students, instructors, and admins.",
+      description: "A comprehensive e-learning solution featuring course browsing, quizzes, assignments, certificates, and progress tracking. Includes distinct role-based React dashboards for students, instructors, and administrators to seamlessly manage content and learning goals.",
+      tech: ["React.js", "Node.js", "Express.js", "Supabase", "PostgreSQL", "REST APIs"],
+      status: "Completed",
+      // TODO: Add GitHub URL for EdTech platform
+      githubUrl: "",
+      // TODO: Add Live Demo URL if available
+      liveUrl: "",
+      // TODO: Add an array of screenshot paths here
+      screenshots: [],
+      coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    },
+    {
+      id: "inventory",
+      title: "Inventory Management System",
+      shortDescription: "A full-stack web app for product records and stock tracking.",
+      description: "A robust inventory management application allowing users to track stock levels and manage product records efficiently. Implemented robust form validation, dynamic routing, and a clean, responsive user interface.",
+      tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Formik", "Yup", "Node.js", "Express", "MongoDB"],
+      status: "Completed",
+      // TODO: Add GitHub URL for Inventory system
+      githubUrl: "",
+      // TODO: Add Live Demo URL if available
+      liveUrl: "",
+      // TODO: Add an array of screenshot paths here
+      screenshots: [],
+      coverImage: "/inventory-mockup.jpg",
+    },
+    {
+      id: "bytefest",
+      title: "ByteFest 2K25 Event Website",
+      shortDescription: "Official website built for a technical fest in Ambajogai.",
+      description: "Developed and managed the official website for the ByteFest technical festival. Handled participant registrations, data management, and ensured smooth site performance and technical support throughout the event.",
+      // TODO: Confirm the exact tech stack used for ByteFest
+      tech: ["React.js", "Tailwind CSS"],
+      status: "Completed",
+      // TODO: Add GitHub URL for ByteFest
+      githubUrl: "",
+      // TODO: Add Live Demo URL if available
+      liveUrl: "",
+      // TODO: Add an array of screenshot paths here
+      screenshots: [],
+      coverImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+    },
+    {
+      id: "ai-forensics",
+      title: "AI-Powered Digital Forensics Automation",
+      shortDescription: "Automated digital forensics tool powered by AI.",
+      description: "An experimental initiative aimed at automating routine digital forensics tasks using AI, increasing efficiency and accuracy in data analysis.",
+      tech: ["Python", "AI", "Cybersecurity"],
+      status: "Experimental / Planned",
+      githubUrl: "",
+      liveUrl: "",
+      screenshots: [],
+      coverImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80",
+    }
+  ],
+  skills: {
+    core: [
+      { category: "Languages", items: ["C", "C++", "Python", "JavaScript", "TypeScript"] },
+      { category: "Frontend", items: ["React.js", "HTML", "CSS", "Tailwind CSS"] },
+      { category: "Backend", items: ["Node.js", "Express.js", "REST APIs", "Authentication"] },
+      { category: "Databases", items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"] },
+      { category: "Tools", items: ["Git", "GitHub", "VS Code", "Postman"] },
+      { category: "CS Fundamentals", items: ["Data Structures and Algorithms", "OOP", "DBMS", "Operating Systems", "Computer Networks"] }
+    ],
+    learning: [
+      "AI automation", "Cybersecurity", "Linux", "Cloud Computing"
+      // TODO: If you are comfortable explaining these in an interview, uncomment them:
+      // "Next.js", "Flask", "MySQL"
+    ]
+  },
+  experience: [
+    {
+      role: "Project Coordinator & Core Tech Member",
+      company: "ByteFest",
+      location: "Ambajogai, Maharashtra",
+      duration: "May 2025 - June 2025",
+      description: "Served as the primary website developer, data manager, and core organizer. Handled participant registrations, technical support, and site maintenance during the festival.",
+      // TODO: If you have accurate attendee/visitor numbers, add them here
+      highlights: [
+        "Built and maintained the event website.",
+        "Managed participant registration data.",
+        "Provided live technical support during the fest."
+      ]
+    }
+  ],
+  education: [
+    {
+      degree: "B.Tech in Computer Science and Engineering",
+      institution: "M.B.E. Society's College of Engineering",
+      location: "Ambajogai, Maharashtra",
+      duration: "2022 - 2026",
+      // TODO: Add your CGPA/percentage if you want to display it
+      cgpa: ""
+    }
+  ],
+  certifications: [
+    {
+      title: "JavaScript Algorithms and Data Structures",
+      issuer: "freeCodeCamp",
+      date: "2024",
+      link: "",
+      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80",
+    },
+    {
+      title: "Responsive Web Design",
+      issuer: "freeCodeCamp",
+      date: "2023",
+      link: "",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    },
+    {
+      title: "Introduction to Cybersecurity",
+      issuer: "Cisco Networking Academy",
+      date: "2024",
+      link: "",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    },
+  ] as Array<{ title: string; issuer: string; date: string; link: string; image: string }>,
+  resume: {
+    // TODO: Place your PDF file in the public/resume/ folder and update this path if different
+    pdfUrl: "/UMESH-TEMBURWAR_resume.pdf",
+    exists: true // TODO: Set this to true when the resume file is actually placed in the folder
+  },
+  contact: {
+    // TODO: Insert your actual email address here
+    email: "",
+    message: "Have a project, collaboration, or opportunity in mind? Send me a message."
+  }
+};
