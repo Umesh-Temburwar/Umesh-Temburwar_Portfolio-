@@ -57,7 +57,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/umeshtemburwar2002-alt/umesh-portfolio.git
+   git clone https://github.com/Umesh-Temburwar/umesh-portfolio.git
    cd umesh-portfolio
    ```
 
@@ -119,5 +119,5 @@ This Vite project is optimized for deployment on [Vercel](https://vercel.com).
 ## Contact
 
 - **Email**: [umeshtemburwar2002@gmail.com](mailto:umeshtemburwar2002@gmail.com)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/vaibhav-waghalkar-848885343) *(Note: Placeholder link currently in code)*
-- **GitHub**: [Check out my code and projects](https://github.com/Vaibhav-Waghalkar) *(Note: Placeholder link currently in code)*
+- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/umesh-temburwar-673555373/)
+- **GitHub**: [Check out my code and projects](https://github.com/Umesh-Temburwar)

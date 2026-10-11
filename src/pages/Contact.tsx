@@ -72,7 +72,7 @@ export default function Contact() {
           </p>
 
           <div className="flex flex-col gap-6">
-            <a href="https://github.com/umeshtemburwar2002-alt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+            <a href="https://github.com/Umesh-Temburwar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
               <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
                 <Github size={24} />
               </div>
