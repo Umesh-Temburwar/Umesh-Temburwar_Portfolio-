@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, use
 import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send } from 'lucide-react';
 
 import emailjs from '@emailjs/browser';
-import { portfolioData } from './data/portfolio';
+import { portfolioData } from '../data/portfolio';
 import { Reveal } from '@/components/Reveal';
 import { SocialLinks } from '@/components/SocialLinks';
 

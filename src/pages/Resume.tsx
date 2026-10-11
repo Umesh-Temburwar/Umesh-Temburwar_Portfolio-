@@ -1,4 +1,3 @@
-import React from 'react';
 import { portfolioData } from '../data/portfolio';
 
 export default function Resume() {

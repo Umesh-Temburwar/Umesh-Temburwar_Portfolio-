@@ -5,6 +5,7 @@ import { useLocation, Link, Routes, Route } from 'react-router-dom';
 import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 import { portfolioData } from './data/portfolio';
 import { Reveal } from '@/components/Reveal';
@@ -723,6 +724,7 @@ const App = () => {
             <Route path="/projects" element={<Projects />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 

@@ -64,11 +64,7 @@ export default function Contact() {
   return (
     <div className="pt-32 px-6 max-w-7xl mx-auto min-h-[calc(100vh-80px)] text-textMain pb-12">
       <div className="grid grid-cols-12 gap-6">
-        <Reveal className="col-span-12 mb-16">
-          <h2 className="text-[clamp(3rem,8vw,6rem)] font-bold tracking-tighter uppercase leading-none">
-            Let's Work <br /><span className="text-primary">Together.</span>
-          </h2>
-        </Reveal>
+
         <Reveal delay={200} className="col-span-12 lg:col-span-5 mb-12 lg:mb-0">
           <h3 className="text-3xl font-bold mb-4 uppercase tracking-tighter">Let's Connect</h3>
           <p className="text-xl text-textMuted mb-12">
