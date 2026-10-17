@@ -4,6 +4,7 @@ import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send } from 'lucide-react';
 
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolio';
+import { useResume } from '../hooks/useResume';
 import { Reveal } from '@/components/Reveal';
 import { SocialLinks } from '@/components/SocialLinks';
 
@@ -252,6 +253,7 @@ const App = () => {
   const shouldReduceMotion = useReducedMotion();
   const [isLoaded, setIsLoaded] = useState(true);
   const [selectedProject, setSelectedProject] = useState<typeof portfolioData.projects[0] | null>(null);
+  const resume = useResume();
 
   const sectionIds = ['hero', 'about', 'projects', 'skills', 'experience', 'education', 'certifications', 'contact'];
   const activeSection = useActiveSection(sectionIds);
@@ -453,8 +455,8 @@ const App = () => {
                   <a href="#projects" className="px-8 py-4 bg-textMain text-background font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2">
                     View Projects <ArrowRight size={18} />
                   </a>
-                  {portfolioData.resume.exists ? (
-                    <a href={portfolioData.resume.pdfUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-border hover:border-primary text-textMain transition-colors flex items-center justify-center gap-2">
+                  {resume.exists ? (
+                    <a href={resume.url} target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-border hover:border-primary text-textMain transition-colors flex items-center justify-center gap-2">
                       View CV
                     </a>
                   ) : (
@@ -696,7 +698,7 @@ const App = () => {
           </section>
 
           {/* RESUME SECTION */}
-          {portfolioData.resume.exists && (
+          {resume.exists && (
             <section id="resume" className="py-32 px-6 max-w-7xl mx-auto border-t border-border scroll-mt-24">
               <div className="grid grid-cols-12 gap-6">
                 <SectionHeader num="07 /" title="My Resume" />
@@ -710,10 +712,10 @@ const App = () => {
 
                   <Reveal delay={200} className="w-full max-w-4xl bg-surface border border-border overflow-hidden">
                     <div className="w-full h-[600px] md:h-[800px] hidden md:block">
-                      <object data={portfolioData.resume.pdfUrl} type="application/pdf" className="w-full h-full">
+                      <object data={resume.url} type="application/pdf" className="w-full h-full">
                         <div className="flex flex-col items-center justify-center h-full p-8 text-center text-textMuted">
                           <p className="mb-4">It appears your browser does not support inline PDF viewing.</p>
-                          <a href={portfolioData.resume.pdfUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-textMain text-background hover:bg-primary hover:text-background transition-colors font-mono text-sm uppercase">
+                          <a href={resume.url} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-textMain text-background hover:bg-primary hover:text-background transition-colors font-mono text-sm uppercase">
                             View PDF Direct
                           </a>
                         </div>
@@ -722,10 +724,10 @@ const App = () => {
 
                     {/* Mobile Fallback or Alternative Actions */}
                     <div className="flex flex-col sm:flex-row gap-4 p-8 justify-center items-center bg-background md:border-t border-border">
-                      <a href={portfolioData.resume.pdfUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
+                      <a href={resume.url} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
                         View CV <ExternalLink size={16} />
                       </a>
-                      <a href={portfolioData.resume.pdfUrl} download className="px-8 py-4 border border-border text-textMain hover:border-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center">
+                      <a href={resume.url} download={resume.filename || 'resume.pdf'} className="px-8 py-4 border border-border text-textMain hover:border-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center">
                         Download CV
                       </a>
                     </div>

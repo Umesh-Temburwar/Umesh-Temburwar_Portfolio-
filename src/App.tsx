@@ -7,6 +7,8 @@ import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
+const ResumeAdmin = React.lazy(() => import('./pages/admin/ResumeAdmin'));
+
 import { portfolioData } from './data/portfolio';
 import { Reveal } from '@/components/Reveal';
 import { SocialLinks } from '@/components/SocialLinks';
@@ -698,6 +700,20 @@ const App = () => {
             } />
             <Route path="/projects" element={<Projects />} />
             <Route path="/resume" element={<Resume />} />
+            <Route
+              path="/admin/resume"
+              element={
+                <React.Suspense
+                  fallback={
+                    <div className="min-h-screen bg-background text-textMain flex items-center justify-center p-6">
+                      <div className="font-mono text-sm text-textMuted">Loading Admin Portal...</div>
+                    </div>
+                  }
+                >
+                  <ResumeAdmin />
+                </React.Suspense>
+              }
+            />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
