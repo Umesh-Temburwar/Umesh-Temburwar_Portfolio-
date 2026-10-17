@@ -191,7 +191,7 @@ export const portfolioData = {
   ] as Array<{ title: string; issuer: string; date: string; link: string; image: string; credentialType?: string; topics?: string[]; hasPdf?: boolean }>,
   resume: {
     // TODO: Place your PDF file in the public/resume/ folder and update this path if different
-    pdfUrl: "/UMESH-TEMBURWAR_resume.pdf",
+    pdfUrl: "/Umesh-Temburwar-OCT.pdf",
     exists: true // TODO: Set this to true when the resume file is actually placed in the folder
   },
   contact: {

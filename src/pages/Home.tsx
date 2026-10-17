@@ -250,7 +250,7 @@ const HeroVisual = ({ isLoaded }: { isLoaded: boolean }) => {
 
 const App = () => {
   const shouldReduceMotion = useReducedMotion();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const [selectedProject, setSelectedProject] = useState<typeof portfolioData.projects[0] | null>(null);
 
   const sectionIds = ['hero', 'about', 'projects', 'skills', 'experience', 'education', 'certifications', 'contact'];
@@ -361,12 +361,8 @@ const App = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     updateScroll();
 
-    // Initial load animation timer
-    const timer = setTimeout(() => setIsLoaded(true), 1500);
-
     return () => {
       window.removeEventListener('scroll', onScroll);
-      clearTimeout(timer);
     };
   }, [shouldReduceMotion]);
 
@@ -383,27 +379,6 @@ const App = () => {
         <GatewayFlow speed={0.8} opacity={0.4} />
         <CustomCursor />
 
-        {/* Page Load Intro overlay rendered conditionally but returning main app always */}
-        <AnimatePresence>
-          {!isLoaded && !shouldReduceMotion && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="fixed inset-0 bg-background z-[200] flex items-center justify-center pointer-events-none"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-4xl font-bold tracking-tighter"
-              >
-                {portfolioData.header.logo}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Scroll Progress Bar */}
         <div
