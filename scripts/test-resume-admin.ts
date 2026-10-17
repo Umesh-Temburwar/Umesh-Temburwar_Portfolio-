@@ -104,18 +104,29 @@ async function runTests() {
     assert(fileRedirect.status === 307, 'GET /api/resume/file returns 307 Temporary Redirect');
     assert(fileRedirect.headers.get('location')?.includes('.pdf') === true, 'Redirect location points to PDF');
 
-    // H. Successful Login & Session Cookie
+    // H. Successful Login & Session Cookie with new credentials UMESH / ARUNA7709
     const validLogin = await fetch('http://localhost:5173/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },
-      body: JSON.stringify({ username: 'admin', password: 'admin123' }),
+      body: JSON.stringify({ username: 'UMESH', password: 'ARUNA7709' }),
     });
-    assert(validLogin.status === 200, 'Login with valid credentials returns 200 OK');
+    assert(validLogin.status === 200, 'Login with UMESH / ARUNA7709 returns 200 OK');
     const cookie = validLogin.headers.get('set-cookie');
     assert(Boolean(cookie && cookie.includes('resume_admin_session')), 'Login response sets HttpOnly session cookie');
+
+    // I. Case-insensitive username check
+    const caseInsensitiveLogin = await fetch('http://localhost:5173/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify({ username: 'umesh', password: 'ARUNA7709' }),
+    });
+    assert(caseInsensitiveLogin.status === 200, 'Login with lowercase "umesh" also returns 200 OK');
   } catch (err: unknown) {
     console.warn('[SKIP] Local HTTP server test skipped (dev server not responding):', err);
   }

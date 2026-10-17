@@ -343,7 +343,7 @@ export default function ResumeAdmin() {
                 autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder="UMESH"
                 className="w-full px-4 py-3 bg-background border border-border text-textMain font-mono text-sm focus:border-primary focus:outline-none transition-colors"
                 required
               />

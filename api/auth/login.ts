@@ -60,8 +60,12 @@ export default async function handler(req: any, res: any) {
     return res.status(500).json({ error: 'Authentication service not configured on server' });
   }
 
-  // Constant-time check: username must match and password must verify
-  const usernameMatches = username === expectedUsername;
+  // Constant-time check: username must match (case-insensitive) and password must verify
+  const usernameMatches = Boolean(
+    username &&
+    expectedUsername &&
+    username.trim().toLowerCase() === expectedUsername.trim().toLowerCase()
+  );
   const passwordMatches = verifyPassword(password || '', expectedHash);
 
   if (!usernameMatches || !passwordMatches) {

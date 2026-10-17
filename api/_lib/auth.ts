@@ -5,7 +5,6 @@ import { SignJWT, jwtVerify } from 'jose';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export function getEnvVar(key: string): string | undefined {
-  if (process.env[key]) return process.env[key];
   try {
     const envLocalPath = path.resolve(process.cwd(), '.env.local');
     if (fs.existsSync(envLocalPath)) {
@@ -25,7 +24,7 @@ export function getEnvVar(key: string): string | undefined {
   } catch {
     // ignore
   }
-  return undefined;
+  return process.env[key];
 }
 
 const COOKIE_NAME = 'resume_admin_session';
