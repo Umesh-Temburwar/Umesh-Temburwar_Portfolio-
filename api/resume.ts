@@ -1,6 +1,6 @@
 import { head, put, del } from '@vercel/blob';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
-import { authenticateRequest, verifyCsrf } from './auth';
+import { authenticateRequest, verifyCsrf } from './auth.js';
 
 export const ACTIVE_RESUME_PATHNAME = 'resume/resume.pdf';
 export const STATIC_FALLBACK_URL = '/Umesh-Temburwar-OCT.pdf';

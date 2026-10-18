@@ -1,2 +1,2 @@
-import handler from '../resume';
+import handler from '../resume.js';
 export default handler;

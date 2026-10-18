@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+import * as crypto from 'node:crypto';
 import { SignJWT, jwtVerify } from 'jose';
 
 const COOKIE_NAME = 'resume_admin_session';

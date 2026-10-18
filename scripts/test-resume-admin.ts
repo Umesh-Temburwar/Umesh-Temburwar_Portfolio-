@@ -1,6 +1,6 @@
 import http from 'node:http';
-import authHandler, { generateCsrfToken } from '../api/auth';
-import resumeHandler from '../api/resume';
+import authHandler, { generateCsrfToken } from '../api/auth.js';
+import resumeHandler from '../api/resume.js';
 
 async function runTests() {
   console.log('\n======================================================');
