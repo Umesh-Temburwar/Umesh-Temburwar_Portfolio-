@@ -3,10 +3,22 @@
   "rewrites": [
     {
       "source": "/resume.pdf",
-      "destination": "/api/resume/file"
+      "destination": "/api/resume?action=file"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/api/auth/:action",
+      "destination": "/api/auth?action=:action"
+    },
+    {
+      "source": "/api/resume/:action",
+      "destination": "/api/resume?action=:action"
+    },
+    {
+      "source": "/api/resume",
+      "destination": "/api/resume"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],

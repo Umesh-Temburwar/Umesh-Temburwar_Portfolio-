@@ -20,13 +20,17 @@ function apiDevPlugin(): Plugin {
         if (effectiveUrl.startsWith('/api/')) {
           try {
             let handlerPath = '';
-            if (effectiveUrl === '/api/auth/login') handlerPath = './api/auth/login.ts';
-            else if (effectiveUrl === '/api/auth/logout') handlerPath = './api/auth/logout.ts';
-            else if (effectiveUrl === '/api/auth/me') handlerPath = './api/auth/me.ts';
-            else if (effectiveUrl === '/api/resume') handlerPath = './api/resume/index.ts';
-            else if (effectiveUrl === '/api/resume/file') handlerPath = './api/resume/file.ts';
-            else if (effectiveUrl === '/api/resume/upload-token') handlerPath = './api/resume/upload-token.ts';
-            else if (effectiveUrl === '/api/resume/finalize') handlerPath = './api/resume/finalize.ts';
+            if (effectiveUrl.startsWith('/api/auth')) {
+              handlerPath = './api/auth.ts';
+              const action = effectiveUrl.replace('/api/auth/', '').replace('/api/auth', '');
+              req.query = req.query || {};
+              if (action) req.query.action = action;
+            } else if (effectiveUrl.startsWith('/api/resume')) {
+              handlerPath = './api/resume.ts';
+              const action = effectiveUrl.replace('/api/resume/', '').replace('/api/resume', '');
+              req.query = req.query || {};
+              if (action) req.query.action = action;
+            }
 
             if (handlerPath) {
               const module = await server.ssrLoadModule(handlerPath);
@@ -69,6 +73,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), apiDevPlugin()],
+    ssr: {
+      external: ['@vercel/blob', 'jose'],
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

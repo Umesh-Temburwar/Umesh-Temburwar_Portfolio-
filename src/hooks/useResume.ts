@@ -3,6 +3,7 @@ import { portfolioData } from '../data/portfolio';
 
 export interface ResumeMetadata {
   url: string;
+  downloadUrl?: string;
   filename: string;
   size: number | null;
   uploadedAt: string | null;
@@ -12,6 +13,7 @@ export interface ResumeMetadata {
 
 const DEFAULT_RESUME: ResumeMetadata = {
   url: portfolioData.resume.pdfUrl || '/Umesh-Temburwar-OCT.pdf',
+  downloadUrl: portfolioData.resume.pdfUrl || '/Umesh-Temburwar-OCT.pdf',
   filename: 'Umesh-Temburwar-OCT.pdf',
   size: null,
   uploadedAt: null,
@@ -36,6 +38,7 @@ export function useResume() {
       if (data && data.url) {
         setResume({
           url: data.url,
+          downloadUrl: data.downloadUrl || data.url,
           filename: data.filename || 'resume.pdf',
           size: typeof data.size === 'number' ? data.size : null,
           uploadedAt: data.uploadedAt || null,

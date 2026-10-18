@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 
 interface ResumeData {
   url: string;
+  downloadUrl?: string;
   filename: string;
   size: number | null;
   uploadedAt: string | null;
@@ -184,11 +185,15 @@ export default function ResumeAdmin() {
     setUploadStatus(null);
 
     try {
-      // 1. Direct-to-blob upload to staging via @vercel/blob/client
-      const newBlob = await upload(file.name, file, {
+      // 1. Direct-to-blob upload to staging via @vercel/blob/client with public access
+      const newBlob = await upload(`staging/${Date.now()}-${file.name}`, file, {
         access: 'public',
         handleUploadUrl: '/api/resume/upload-token',
         clientPayload: JSON.stringify({ filename: file.name }),
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-Token': csrfToken,
+        },
         onUploadProgress: (progress) => {
           setUploadProgress(Math.round(progress.percentage));
         },
@@ -507,7 +512,7 @@ export default function ResumeAdmin() {
                   rel="noopener noreferrer"
                   className="text-xs text-primary hover:underline flex items-center gap-1.5"
                 >
-                  https://umeshtemburwar.dev/resume.pdf <ExternalLink size={12} />
+                  {typeof window !== 'undefined' ? `${window.location.origin}/resume.pdf` : '/resume.pdf'} <ExternalLink size={12} />
                 </a>
               </div>
             </div>
@@ -524,7 +529,7 @@ export default function ResumeAdmin() {
                   <ExternalLink size={14} /> Open
                 </a>
                 <a
-                  href={resumeData.url}
+                  href={resumeData.downloadUrl || '/api/resume/file?download=1'}
                   download={resumeData.filename || 'resume.pdf'}
                   className="flex-1 py-2.5 px-3 bg-background border border-border hover:border-primary text-textMain text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
                 >

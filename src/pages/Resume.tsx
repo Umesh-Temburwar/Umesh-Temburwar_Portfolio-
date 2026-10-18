@@ -1,7 +1,7 @@
 import { useResume } from '../hooks/useResume';
 
 export default function Resume() {
-  const { url, filename, exists, isLoading } = useResume();
+  const { url, downloadUrl, filename, exists, isLoading } = useResume();
 
   return (
     <div className="pt-32 pb-16 px-4 md:px-6 w-full h-[calc(100vh-80px)] min-h-screen flex flex-col items-center justify-center bg-background text-textMain">
@@ -26,7 +26,7 @@ export default function Resume() {
           />
           <div className="absolute -bottom-16 w-full flex justify-center">
             <a
-              href={url}
+              href={downloadUrl || url}
               download={filename || 'resume.pdf'}
               className="px-6 py-3 border border-border text-textMain hover:border-primary hover:text-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2 bg-background"
             >

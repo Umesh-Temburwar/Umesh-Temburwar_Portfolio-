@@ -262,12 +262,33 @@ const App = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('Unable to send your message. Please try again.');
   const formRef = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting || !formRef.current) return;
     
+    const form = formRef.current;
+    const formData = new FormData(form);
+    const name = (formData.get('from_name') as string)?.trim();
+    const email = (formData.get('from_email') as string)?.trim();
+    const subject = (formData.get('subject') as string)?.trim();
+    const message = (formData.get('message') as string)?.trim();
+
+    if (!name || !email || !subject || !message) {
+      setSubmitStatus('error');
+      setErrorMessage('Please fill in all required fields.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setSubmitStatus('error');
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -284,11 +305,16 @@ const App = () => {
         });
       }
       setSubmitStatus('error');
+      setErrorMessage(
+        import.meta.env.DEV
+          ? 'EmailJS configuration is missing. Ensure VITE_EMAILJS_* keys are in .env.local and Vite has been restarted.'
+          : 'Unable to send your message. Please try again.'
+      );
       setIsSubmitting(false);
       return;
     }
 
-    emailjs.sendForm(serviceId, templateId, formRef.current, {
+    emailjs.sendForm(serviceId, templateId, form, {
       publicKey: publicKey,
     })
       .then((response) => {
@@ -296,14 +322,24 @@ const App = () => {
           console.info("[EmailJS Diagnostics] Delivery success:", response.status, response.text);
         }
         setSubmitStatus('success');
-        formRef.current?.reset();
+        form.reset();
       })
       .catch((error: unknown) => {
+        const errObj = error as { status?: number; text?: string };
         if (import.meta.env.DEV) {
-          const errObj = error as { status?: number; text?: string };
-          console.error("[EmailJS Diagnostics] Delivery failed:", errObj?.status, errObj?.text || error);
+          console.error("[EmailJS Diagnostics] Delivery failed:", errObj?.status, errObj?.text || 'Delivery failed');
+          if (errObj?.status === 404 || errObj?.text === 'Account not found') {
+            console.error(
+              "[EmailJS Diagnostics] 'Account not found': The configured Public Key does not exist in EmailJS. Verify your Public Key under Account -> General in the EmailJS dashboard."
+            );
+          }
         }
         setSubmitStatus('error');
+        setErrorMessage(
+          import.meta.env.DEV && (errObj?.status === 404 || errObj?.text === 'Account not found')
+            ? 'EmailJS error: Account not found. Verify your Public Key in EmailJS Dashboard.'
+            : 'Unable to send your message. Please try again.'
+        );
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -727,7 +763,7 @@ const App = () => {
                       <a href={resume.url} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
                         View CV <ExternalLink size={16} />
                       </a>
-                      <a href={resume.url} download={resume.filename || 'resume.pdf'} className="px-8 py-4 border border-border text-textMain hover:border-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center">
+                      <a href={resume.downloadUrl || resume.url} download={resume.filename || 'resume.pdf'} className="px-8 py-4 border border-border text-textMain hover:border-primary transition-colors font-mono text-sm uppercase tracking-widest flex items-center gap-2 w-full sm:w-auto justify-center">
                         Download CV
                       </a>
                     </div>
@@ -785,7 +821,7 @@ const App = () => {
                     <div className="text-[#56D8E8] font-mono text-sm">Message sent successfully!</div>
                   )}
                   {submitStatus === 'error' && (
-                    <div className="text-red-500 font-mono text-sm">Unable to send your message. Please try again.</div>
+                    <div className="text-red-500 font-mono text-sm">{errorMessage}</div>
                   )}
 
                   <button type="submit" disabled={isSubmitting} className="self-start px-8 py-4 bg-textMain text-background hover:bg-primary hover:text-background font-mono text-sm uppercase tracking-widest transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
