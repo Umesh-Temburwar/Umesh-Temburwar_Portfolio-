@@ -107,9 +107,9 @@ export const portfolioData = {
     core: [
       { category: "Languages", items: ["C", "C++", "Python", "JavaScript", "TypeScript"] },
       { category: "Frontend", items: ["React.js", "HTML", "CSS", "Tailwind CSS"] },
-      { category: "Backend", items: ["Node.js", "Express.js", "REST APIs", "Authentication" },
+      { category: "Backend", items: ["Node.js", "Express.js", "REST APIs", "Authentication"] },
       { category: "Databases", items: ["SQL", "PostgreSQL","MongoDB", "Supabase", "Firebase"] },
-      { category: "Tools", items: ["Git", "GitHub", "VS Code", "Postman","Linux","Docker","Apache Airflow","Apache Spark"] },
+      { category: "Tools", items: ["Git", "GitHub", "VS Code", "Postman","Linux","Docker"] },
       { category: "CS Fundamentals", items: ["Data Structures and Algorithms", "OOP", "DBMS", "Operating Systems", "Computer Networks"] }
     ],
     learning: [
