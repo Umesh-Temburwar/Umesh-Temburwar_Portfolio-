@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Mail, Phone } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { Reveal } from '../components/Reveal';
 import { IconLinkedin as Linkedin, IconInstagram as Instagram } from '../components/icons/BrandIcons';
-import { Mail } from 'lucide-react';
 
 // Custom github icon
 const Github = ({ size = 24, className = "" }) => (
@@ -146,6 +145,16 @@ export default function Contact() {
               <div>
                 <div className="font-bold text-lg group-hover:text-primary transition-colors">Email</div>
                 <div className="text-textMuted font-mono text-sm">Send me a direct email</div>
+              </div>
+            </a>
+
+            <a href="tel:+918856087984" className="flex items-center gap-6 group">
+              <div className="w-14 h-14 border border-border flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                <Phone size={24} />
+              </div>
+              <div>
+                <div className="font-bold text-lg group-hover:text-primary transition-colors">Phone</div>
+                <div className="text-textMuted font-mono text-sm">+91 8856087984</div>
               </div>
             </a>
           </div>

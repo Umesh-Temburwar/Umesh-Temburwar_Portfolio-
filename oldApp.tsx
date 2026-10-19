@@ -512,7 +512,7 @@ const App = () => {
                         </span>
                       )}
                     </motion.div>
-                    
+
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
@@ -527,9 +527,9 @@ const App = () => {
                     <HeroVisual isLoaded={isLoaded} />
                   </div>
                 </div>
-                
+
                 {/* Scroll Cue Desktop */}
-                <motion.div 
+                <motion.div
                   className="hidden lg:flex absolute bottom-8 left-6 items-center gap-2 -rotate-90 origin-left"
                   style={{ opacity: useTransform(scrollY, [0, 80], [1, 0]) }}
                 >
@@ -757,7 +757,7 @@ const App = () => {
                             )}
                             <h4 className="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">{cert.title}</h4>
                             <div className="font-mono text-xs text-textMuted mb-4">{cert.issuer} ΓÇó {cert.date}</div>
-                            
+
                             {cert.topics && cert.topics.length > 0 && (
                               <div className="flex flex-wrap gap-2 mb-6 mt-auto">
                                 {cert.topics.slice(0, 4).map((topic: string) => (
@@ -768,7 +768,7 @@ const App = () => {
                                 )}
                               </div>
                             )}
-                            
+
                             <div className="mt-auto pt-4 border-t border-border/50">
                               {cert.link && cert.hasPdf !== false ? (
                                 <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-primary flex items-center gap-2 hover:underline w-fit">

@@ -195,8 +195,8 @@ export const portfolioData = {
     exists: true // TODO: Set this to true when the resume file is actually placed in the folder
   },
   contact: {
-    // TODO: Insert your actual email address here
-    email: "",
+    email: "umeshtemburwar2002@gmail.com",
+    phone: "+91 8856087984",
     message: "Have a project, collaboration, or opportunity in mind? Send me a message."
   }
 };

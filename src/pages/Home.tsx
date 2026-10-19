@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValue, useAnimationFrame, useMotionValueEvent, LayoutGroup } from 'framer-motion';
-import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send } from 'lucide-react';
+import { ArrowUp, ArrowRight, ExternalLink, X, Mail, Send, Phone } from 'lucide-react';
 
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolio';
@@ -787,13 +787,23 @@ const App = () => {
                   {portfolioData.contact.message}
                 </p>
 
-                <a
-                  href={`mailto:${portfolioData.contact.email || 'you@example.com'}`}
-                  className="px-8 py-4 border border-border hover:border-primary text-textMain hover:text-primary transition-colors inline-flex items-center gap-3 text-lg md:text-xl mb-12"
-                >
-                  <Mail size={20} />
-                  {portfolioData.contact.email || 'umeshtemburwar2002@gmail.com'}
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  <a
+                    href={`mailto:${portfolioData.contact.email || 'umeshtemburwar2002@gmail.com'}`}
+                    className="px-8 py-4 border border-border hover:border-primary text-textMain hover:text-primary transition-colors inline-flex items-center gap-3 text-lg md:text-xl"
+                  >
+                    <Mail size={20} />
+                    {portfolioData.contact.email || 'umeshtemburwar2002@gmail.com'}
+                  </a>
+
+                  <a
+                    href={`tel:${portfolioData.contact.phone || '+918856087984'}`}
+                    className="px-8 py-4 border border-border hover:border-primary text-textMain hover:text-primary transition-colors inline-flex items-center gap-3 text-lg md:text-xl"
+                  >
+                    <Phone size={20} />
+                    {portfolioData.contact.phone || '+91 8856087984'}
+                  </a>
+                </div>
 
                 <SocialLinks />
               </Reveal>
